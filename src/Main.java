@@ -6,7 +6,7 @@ public class Main {
         System.out.println("Hello world!");
 
 
-        Connection con = SQLDatabase.getDBConnection();
+        Connection con = custDatabase.getDBConnection();
         if(con!= null){
             System.out.println("MADE IT!!");
         }

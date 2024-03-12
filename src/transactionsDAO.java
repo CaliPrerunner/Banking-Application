@@ -1,7 +1,19 @@
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class transactionsDAO implements transactionDAOInter{
+    static String url = tranactionDataBase.getURL();
+    static String username = tranactionDataBase.getURL();
+    static String pwd = tranactionDataBase.getURL();
+
+    transactionsDAO(){try {
+
+        Connection con = custDatabase.getDBConnection();
+
+    } catch (SQLException se) {
+        System.out.println(se.getMessage());
+    }        }
     @Override
     public transactions get(int id) throws SQLException {
         return null;
