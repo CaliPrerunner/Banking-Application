@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.SQLException;
 
+
 public class Main {
     public static void main(String[] args) throws SQLException {
         System.out.println("Hello world!");
@@ -11,7 +12,8 @@ public class Main {
             System.out.println("MADE IT!!");
         }
 
-
+        //ObjectMapper om = new ObjectMapper();
+        //String jsonString = "{"name":"John Doe","email":"jdoe@sfsu.edu"}"; YOUR_OBJECT obj = om.readValue(jsonString, YOUR_OBJECT.class);
 
 
   customer david = new customer("David", "Smith", "343243", "2343 Chanelour Drive", "San Fran", "CA", "90275", "user12", "poof", "3109229103", "October12th", 'm');
