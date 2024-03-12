@@ -30,7 +30,7 @@ public class custDAO implements customerDAOInter {
         cust.setCustID(idd);
         cust.setLastName(lname);
         cust.setAccList(acc);
-        reutn cust;
+        return cust;
 
 
     }
