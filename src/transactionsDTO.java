@@ -1,22 +1,22 @@
 import java.util.Date;
 import java.util.HashMap;
 
-public class transactionDTO {
+public class transactionsDTO {
     //used to mark if customer has withdrawed via a negative value and deposited money via a postivie value;
     public HashMap<Date, Double> transactions;
     int custID;
 
-    public transactionDTO(int id) {
+    public transactionsDTO(int id) {
         this.custID=id;
     }
 
-    public transactionDTO(double m) {
+    public transactionsDTO(double m) {
         Date d = new Date();
         this.transactions = new HashMap<>();
         transactions.put(d, m);
     }
 
-    public transactionDTO(double m, Date d) {
+    public transactionsDTO(double m, Date d) {
         this.transactions = new HashMap<>();
         transactions.put(d, m);
     }

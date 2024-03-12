@@ -15,6 +15,11 @@ public class transactions {
         this.transactions = new HashMap<>();
         transactions.put(d, m);
     }
+    public transactions(double m, int id) {
+        Date d = new Date();
+        this.custID=id;
+        this.transactions = new HashMap<>();
+        transactions.put(d, m);}
 
     public transactions(double m, Date d) {
         this.transactions = new HashMap<>();

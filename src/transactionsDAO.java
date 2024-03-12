@@ -2,10 +2,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class transactionsDAO implements transactionDAOInter{
-    static String url = tranactionDataBase.getURL();
-    static String username = tranactionDataBase.getURL();
-    static String pwd = tranactionDataBase.getURL();
+public class transactionsDAO implements transactionsDAOInter {
+    static String url = tranactionsDataBase.getURL();
+    static String username = tranactionsDataBase.getURL();
+    static String pwd = tranactionsDataBase.getURL();
 
     transactionsDAO(){try {
 

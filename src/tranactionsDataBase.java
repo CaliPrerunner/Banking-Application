@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class tranactionDataBase {
+public class tranactionsDataBase {
 
         private static String url = "jdbc:root@localhost:3306";
         private static String usr = "root";
@@ -12,7 +12,7 @@ public class tranactionDataBase {
         private static final String UPDATE_SQL = "UPDATE custID, transactions WHERE id = ?";
         private static final String DELETE_SQL = "DELETE FROM transaction WHERE id = ?";
 
-        private tranactionDataBase(){
+        private tranactionsDataBase(){
 
         }
         public static Connection getDBConnection() throws SQLException {

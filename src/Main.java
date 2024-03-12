@@ -20,10 +20,9 @@ public class Main {
 
     david.createBankAccount(12.4);
         david.createBankAccount(12.4);
-        //david.addTransaction(12);
+        david.addTransaction(12);
        System.out.println(david.getAccList());
         System.out.println("poop "+david.getAccList().getCount());
-
 
 
      System.out.println("david account ballance: "+david.getCustBall());
