@@ -1,9 +1,8 @@
 
-
-
-public class priorityQueueLL<T> {
+public class custPQLL<T> implements PQLLInterface<T> {
     private node head;
     private int count;
+
 
 
     public class node<T>{
@@ -40,14 +39,16 @@ public class priorityQueueLL<T> {
 
     }
 
-    public priorityQueueLL() {
+    public custPQLL() {
         this.count =0;
         this.head = new node();
+
     }
 
-    public priorityQueueLL(T data, int prority) {
+    public custPQLL(T data, int prority) {
         this.count =0;
         this.head = new node<>(data, prority);
+
     }
 
 
@@ -60,6 +61,8 @@ public class priorityQueueLL<T> {
 
     //******************************Priority Queue methods************************************
 
+
+
     //clears whole list
     public void clear(){
         this.head = null;
@@ -67,7 +70,10 @@ public class priorityQueueLL<T> {
     public node getHead(){
         return this.head;
     }
+    //gets the length of the priority queue list
     public int getCount(){return count;}
+
+
 
     public void listALL(){
         System.out.println("########### LIST ##########");
@@ -108,10 +114,8 @@ public class priorityQueueLL<T> {
         return true;
     }
 
-    //gets the length of the priority queue list
-    public int getLength() {
-        return count;
-    }
+
+
 
     public boolean isEmpty() {
         return head.data == null;
@@ -189,15 +193,30 @@ public class priorityQueueLL<T> {
         this.count++;
 
         }
+        //returns the object of the highest priority
         public node peek(){
         return this.head;
         }
+
+        //
+
+        //returns the last node in the list
     public node pop() {
         node current = this.head;
         while(current.next != null){
             current = current.next;
         }
         return current;
+    }
+    //removes the last entry
+    public void deque(){
+        node n = new node();
+
+        n = this.head;
+        while(n.next.next != null){
+            n = n.next;
+        }
+        n.next = null;
     }
 
 

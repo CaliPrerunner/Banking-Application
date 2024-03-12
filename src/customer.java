@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class customer {
+public class customer implements customerInterface{
 
     private String firstName;
     private String lastName;
@@ -11,7 +11,7 @@ public class customer {
     private String birthday;
     private char gender;
     private Date dateCreated;
-   private priorityQueueLL accounts;
+    private custPQLL accounts;
 
     private String addy;
     //^linked list of addy <- ********implement after linked list object has been created***********
@@ -34,9 +34,12 @@ public class customer {
         this.birthday = bday;
         this.gender = sex;
         this.customerID = (int) (Math.random() % 1000);
-        this.accounts = new priorityQueueLL();
+        this.accounts = new custPQLL();
 
         //later to implement: a checker to see if ID has been taken
+    }
+    public custPQLL getAccList(){
+        return this.accounts;
     }
     //normal getters/setters
     public int getCustomerID() {
@@ -84,9 +87,7 @@ public class customer {
     }
 
     //account logic
-    public priorityQueueLL getAccList(){
-        return this.accounts;
-    }
+
     //returns how many accounts the customer has
     public int getNumOfAccs(){return this.accounts.getCount();}
     //returns a sting of account of a customer ballance via a string
@@ -104,7 +105,7 @@ public class customer {
             return ballList;
         }
     }
-    //returns 0 if nothing
+    //returns 0 if nothing, returns double of total account ballance
     public double getTotalCustBall(){
         if(this.accounts == null){
             return 0;
@@ -120,11 +121,16 @@ public class customer {
         }
     }
     //adds account obj with priority
-    public void addAccount(account acc, int p){
-        this.getAccList().enqueue(acc,p);
+    public void createBankAccount(double m){
+        int id = this.customerID;
+        account t = new account(m,id);
+        this.getAccList().enqueue(t,1);
     }
-
-
+    //does not work
+    public void addTransaction(double m){
+        account t = (account) this.getAccList().getNode(1).getData();
+        t.transactionList.deposit(m,t);
+    }
 
     public void setAddy(String addy) {
         this.addy = addy;
@@ -154,13 +160,16 @@ public class customer {
     public void setSSN(String SSN) {
         this.SSN = SSN;
     }
+    public void setCustID(int idd){this.customerID=idd;}
+    public void setAccList(custPQLL list){this.accounts = list;}
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
 
 
-        int priority = 0;
+
+
         //date of customer will be considered
         //from the head node use the iterator from the LL class
         //iterator trough the LL
@@ -169,11 +178,11 @@ public class customer {
 
     //for the string input we need a method to go through the linked list of accounts and get the accounts
                                     //^^^^^^^^^^^
-        public int compare(Date d, String ballance, priorityQueueLL list){
+        public int compare(Date d, String ballance, custPQLL list){
             //if list is empty retuns 1, highest priority
             if(list.isEmpty()){return 1;}
 
-            priorityQueueLL.node current = list.getHead();
+            custPQLL.node current = list.getHead();
 
             //compare dates
            // if(d.equals(current.get) )

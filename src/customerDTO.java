@@ -1,4 +1,5 @@
-import java.sql.SQLException;
+import java.util.Date;
+
 public class customerDTO {
 
     private String firstName;
@@ -10,6 +11,8 @@ public class customerDTO {
     private String birthday;
     private char gender;
     private int customerID;
+    private Date dateCreated;
+    private custPQLL<account> accounts;
 
     private String addy;
     //^linked list of addy <- ********implement after linked list object has been created***********
@@ -29,16 +32,15 @@ public class customerDTO {
         this.birthday = bday;
         this.gender = sex;
         this.customerID = (int) (Math.random() % 1000);
+        this.accounts = new custPQLL<account>();
         //later to implement: a checker to see if ID has been taken
     }
 
-    /*
-    public static customer customerDTO(int customerID){
-        customer n = null;
 
-
+    public customerDTO(int customerID){
+        this.customerID = customerID;
     }
-*/
+
 
     public int getCustomerID() {
         return customerID;
@@ -67,7 +69,47 @@ public class customerDTO {
     public String getUserName() {
         return userName;
     }
+    public custPQLL getAccList(){
+        return this.accounts;
+    }
+    public String getCustBall(){
+        if(this.accounts == null){
+            return null;
+        }else{
+            //"s: indicates its the start of the string
+            String ballList ="S:";
+            for(int x=1; x<= this.accounts.getCount(); x++){
+                account t = (account) this.getAccList().getNode(x).getData();
+                ballList += String.valueOf(t.getBallance()) + " ";
 
+            }
+            return ballList;
+        }
+    }
+    public int getNumOfAccs(){return this.accounts.getCount();}
+    public double getTotalCustBall(){
+        if(this.accounts == null){
+            return 0;
+        }else{
+            double ballList =0;
+            for(int x=1; x<= this.accounts.getCount(); x++){
+                account t = (account) this.getAccList().getNode(x).getData();
+                ballList += t.getBallance();
+
+            }
+            return ballList;
+
+        }
+    }
+    public void createBankAccount(double m){
+        int id = this.customerID;
+        account t = new account(m,id);
+        this.getAccList().enqueue(t,1);
+    }
+    public void addTransaction(double m){
+        account t = (account) this.getAccList().getNode(1).getData();
+        t.transactionList.deposit(m,t);
+    }
     public void getAddy() {
         System.out.println("First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))));
         System.out.println("Street:" + this.addy.substring((this.addy.indexOf("STR: ") + 4), (this.addy.indexOf("C:"))) + " City: " + this.addy.substring((this.addy.indexOf("C:") + 2), (this.addy.indexOf("ST:"))) + "\nState: " + this.addy.substring((this.addy.indexOf("ST:") + 3), (this.addy.indexOf("Z:"))) + " Zip Code: " + this.addy.substring((this.addy.indexOf("Z:") + 2), (this.addy.length())));
@@ -119,4 +161,14 @@ public class customerDTO {
 
 
 
+
+
+
+    //dto specific methods
+    public static customer customerByDTO(int cid) {
+        customer cust = null;
+
+
+        return null;
+    }
 }

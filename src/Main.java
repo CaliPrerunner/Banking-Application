@@ -1,49 +1,56 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         System.out.println("Hello world!");
 
 
-        customer david = new customer("David", "Smith", "343243", "2343 Chanelour Drive", "San Fran", "CA", "90275", "user12", "poof", "3109229103", "October12th", 'm');
+        Connection con = SQLDatabase.getDBConnection();
+        if(con!= null){
+            System.out.println("MADE IT!!");
+        }
 
-        double s = -12;
-        double t = 24;
-        System.out.println(s+t);
-        /*
-      account a = new  account(david.customerID);
-      a.setBallance(23.4);
-      david.addAccount(a,1);
-        account a2 = new  account(david.customerID);
-        a2.setBallance(222);
-        david.addAccount(a2,2);
-        account a3 = new  account(david.customerID);
-        a3.setBallance(333);
-        david.addAccount(a3,1);
-         */
 
-     // System.out.println("david account ballance: "+david.getCustBall());
-        //System.out.println("david account total: "+david.getTotalCustBall());
 
-        //david.getAddy();
-        //String g = customer.returnAddy(david);
-       // System.out.println(customer.returnAddy(david));
 
-        int test = 3;
-/*
-        priorityQueueLL list = new priorityQueueLL();
+  customer david = new customer("David", "Smith", "343243", "2343 Chanelour Drive", "San Fran", "CA", "90275", "user12", "poof", "3109229103", "October12th", 'm');
+
+
+
+    david.createBankAccount(12.4);
+        david.createBankAccount(12.4);
+        //david.addTransaction(12);
+       System.out.println(david.getAccList());
+        System.out.println("poop "+david.getAccList().getCount());
+
+
+
+     System.out.println("david account ballance: "+david.getCustBall());
+        System.out.println("david account total: "+david.getTotalCustBall());
+
+        david.getAddy();
+        String g = customer.returnAddy(david);
+       System.out.println(customer.returnAddy(david));
+
+
+        custPQLL list = new custPQLL();
 
         System.out.println(list.isEmpty());
 
-       list.addObj("1", 1);
+        //still have not created method to assign priorities, still working on it
 
-        list.addObj("3", 2);
-
-        list.addObj("2", 1);
+       list.enqueue("1", 1);
+        list.enqueue("3", 2);
+        list.enqueue("2", 1);
         list.listALL();
-       list.addObj("4", 3);
-        list.addObj("5", 3);
-        list.addObj("2s",1);
+       list.enqueue("4", 3);
+        list.enqueue("5", 3);
+        list.enqueue("2s",1);
+
         list.listALL();
         list.removeObj("2");
+        list.deque();
         list.listALL();
         System.out.println(" pop: "+ list.pop());
         System.out.println(list.isEmpty());
@@ -53,6 +60,6 @@ public class Main {
 
 
 
- */
+
     }
 }
