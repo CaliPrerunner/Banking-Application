@@ -1,8 +1,7 @@
 
-public class custPQLL<T> implements PQLLInterface<T> {
+public class PQLL<T> implements PQLLInterface<T> {
     private node head;
     private int count;
-
 
 
     public class node<T>{
@@ -35,17 +34,18 @@ public class custPQLL<T> implements PQLLInterface<T> {
         public T getData(){
             return this.data;
         }
+        public node getNext(){return this.next;}
 
 
     }
 
-    public custPQLL() {
+    public PQLL() {
         this.count =0;
         this.head = new node();
 
     }
 
-    public custPQLL(T data, int prority) {
+    public PQLL(T data, int prority) {
         this.count =0;
         this.head = new node<>(data, prority);
 
@@ -72,7 +72,6 @@ public class custPQLL<T> implements PQLLInterface<T> {
     }
     //gets the length of the priority queue list
     public int getCount(){return count;}
-
 
 
     public void listALL(){
@@ -113,9 +112,6 @@ public class custPQLL<T> implements PQLLInterface<T> {
         }
         return true;
     }
-
-
-
 
     public boolean isEmpty() {
         return head.data == null;
@@ -197,8 +193,6 @@ public class custPQLL<T> implements PQLLInterface<T> {
         public node peek(){
         return this.head;
         }
-
-        //
 
         //returns the last node in the list
     public node pop() {

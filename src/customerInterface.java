@@ -10,7 +10,7 @@ public interface customerInterface {
      String birthday= null;
      char gender= ' ';
      Date dateCreated= null;
-     custPQLL accounts = null;
+     PQLL accounts = null;
      String addy = null;
     int customerID=0;
     public void setAddy(String addy);
@@ -32,13 +32,14 @@ public interface customerInterface {
     public void setSSN(String SSN) ;
 
     public void setCustID(int idd);
-    public void setAccList(custPQLL list);
+    public void setAccList(PQLL list);
     public void setUserName(String userName) ;
-    public String getCustBall();
+    public String getCustAccList();
     public int getNumOfAccs();
     public double getTotalCustBall();
     public void createBankAccount(double m);
-    public void addTransaction(double m);
+    public void deposit(double m, int x);
+        public void withdraw(double m, int x);
 
     public int getCustomerID();
 

@@ -1,2 +1,2 @@
-public interface accDAOInter extends DAOInterface<account>{
+public interface accDAOInter extends DAOInterface<account> {
 }

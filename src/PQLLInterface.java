@@ -2,13 +2,13 @@ public interface PQLLInterface<T> {
 
     public class node<T>{
         private T data;
-        private custPQLL.node next;
+        private PQLL.node next;
         private int priorioty;
 
         node(){
             int priority;
             T data;
-            custPQLL.node next;
+            PQLL.node next;
         }
         public node(T data, int prioroty){
             this.data = data;
@@ -16,7 +16,7 @@ public interface PQLLInterface<T> {
             this.priorioty = prioroty;
         }
         public void setData(T data){this.data =data;}
-        public void setNext(custPQLL.node node){this.next =node;}
+        public void setNext(PQLL.node node){this.next =node;}
         public void setPriorioty(int priorioty){this.priorioty = priorioty;}
 
 
@@ -37,9 +37,9 @@ public interface PQLLInterface<T> {
     public void listALL();
     public void enqueue(T data, int pri);
     public int getCount();
-    public custPQLL.node getHead();
-    public custPQLL.node peek();
-    public custPQLL.node pop();
+    public PQLL.node getHead();
+    public PQLL.node peek();
+    public PQLL.node pop();
     public void removeObj(T data);
     public boolean isEmpty();
 

@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class accDAO implements accDAOInter{
+public class accDAO implements accDAOInter {
 
     static String url = accDatabase.getURL();
     static String username = accDatabase.getURL();

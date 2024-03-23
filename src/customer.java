@@ -1,4 +1,7 @@
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class customer implements customerInterface{
 
@@ -10,20 +13,19 @@ public class customer implements customerInterface{
     private String phone;
     private String birthday;
     private char gender;
-    private Date dateCreated;
-    private custPQLL accounts;
+    private LocalDate dateCreated;
+    private PQLL accounts;
+    int customerID;
 
     private String addy;
     //^linked list of addy <- ********implement after linked list object has been created***********
-    int customerID;
-    //addy obj/ list?
-    //accout's stored in a collection (list)
+
 
     public customer(){
 
     }
     public customer(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, char sex) {
-        this.dateCreated = new Date();
+        this.dateCreated = LocalDate.now();
         this.firstName = fn;
         this.lastName = ln;
         this.SSN = ssn;
@@ -33,13 +35,10 @@ public class customer implements customerInterface{
         this.phone = phon;
         this.birthday = bday;
         this.gender = sex;
-        this.customerID = (int) (Math.random() % 1000);
-        this.accounts = new custPQLL();
+        this.customerID = (int) (Math.random() * 1000);
+        this.accounts = new PQLL();
 
         //later to implement: a checker to see if ID has been taken
-    }
-    public custPQLL getAccList(){
-        return this.accounts;
     }
     //normal getters/setters
     public int getCustomerID() {
@@ -73,33 +72,30 @@ public class customer implements customerInterface{
         System.out.println("First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))));
         System.out.println("Street:" + this.addy.substring((this.addy.indexOf("STR: ") + 4), (this.addy.indexOf("C:"))) + " City: " + this.addy.substring((this.addy.indexOf("C:") + 2), (this.addy.indexOf("ST:"))) + "\nState: " + this.addy.substring((this.addy.indexOf("ST:") + 3), (this.addy.indexOf("Z:"))) + " Zip Code: " + this.addy.substring((this.addy.indexOf("Z:") + 2), (this.addy.length())));
     }
-    public static void getAddy(customer obj) {
-        System.out.println("First name: " + obj.addy.substring((obj.addy.indexOf("FN:") + 3), (obj.addy.indexOf("STR:"))) + " Last name: " + obj.addy.substring((obj.addy.indexOf("LN:") + 3), (obj.addy.indexOf("FN:"))));
-        System.out.println("Street:" + obj.addy.substring((obj.addy.indexOf("STR: ") + 4), (obj.addy.indexOf("C:"))) + " City: " + obj.addy.substring((obj.addy.indexOf("C:") + 2), (obj.addy.indexOf("ST:"))) + "\nState: " + obj.addy.substring((obj.addy.indexOf("ST:") + 3), (obj.addy.indexOf("Z:"))) + " Zip Code: " + obj.addy.substring((obj.addy.indexOf("Z:") + 2), (obj.addy.length())));
-    }
-    public static String returnAddy(customer obj){
-        String addy = "First name: " + obj.addy.substring((obj.addy.indexOf("FN:") + 3), (obj.addy.indexOf("STR:"))) + " Last name: " + obj.addy.substring((obj.addy.indexOf("LN:") + 3), (obj.addy.indexOf("FN:"))) +"Street:" + obj.addy.substring((obj.addy.indexOf("STR: ") + 4), (obj.addy.indexOf("C:"))) + " City: " + obj.addy.substring((obj.addy.indexOf("C:") + 2), (obj.addy.indexOf("ST:"))) + "\nState: " + obj.addy.substring((obj.addy.indexOf("ST:") + 3), (obj.addy.indexOf("Z:"))) + " Zip Code: " + obj.addy.substring((obj.addy.indexOf("Z:") + 2), (obj.addy.length()));
-        return addy;
-    }
+    //return a human readable string representing of address
     public String returnAddy(){
         String addy = "First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))) +"Street:" + this.addy.substring((this.addy.indexOf("STR: ") + 4), (this.addy.indexOf("C:"))) + " City: " + this.addy.substring((this.addy.indexOf("C:") + 2), (this.addy.indexOf("ST:"))) + "\nState: " + this.addy.substring((this.addy.indexOf("ST:") + 3), (this.addy.indexOf("Z:"))) + " Zip Code: " + this.addy.substring((this.addy.indexOf("Z:") + 2), (this.addy.length()));
         return addy;
     }
 
+
     //account logic
 
+    public PQLL getAccList(){
+        return this.accounts;
+    }
     //returns how many accounts the customer has
     public int getNumOfAccs(){return this.accounts.getCount();}
     //returns a sting of account of a customer ballance via a string
-    public String getCustBall(){
+    public String getCustAccList(){
         if(this.accounts == null){
             return null;
         }else{
             //"s: indicates its the start of the string
-            String ballList ="S:";
+            String ballList ="";
             for(int x=1; x<= this.accounts.getCount(); x++){
                 account t = (account) this.getAccList().getNode(x).getData();
-                ballList += String.valueOf(t.getBallance()) + " ";
+                ballList += String.valueOf(t.getBalance()) + " ";
 
             }
             return ballList;
@@ -113,24 +109,41 @@ public class customer implements customerInterface{
             double ballList =0;
             for(int x=1; x<= this.accounts.getCount(); x++){
                 account t = (account) this.getAccList().getNode(x).getData();
-                ballList += t.getBallance();
+                ballList += t.getBalance();
 
             }
             return ballList;
 
         }
     }
-    //adds account obj with priority
+    //adds account obj with priority and ballance created
     public void createBankAccount(double m){
         int id = this.customerID;
-        account t = new account(m,id);
-        this.getAccList().enqueue(t,1);
+        LocalDate d = LocalDate.now();
+        account t = new account(m,d, id);
+        this.getAccList().enqueue(t,this.compareAccounts(d));
+    }
+    public void createBankAccount(LocalDate d){
+        int id = this.customerID;
+        account t = new account(12,d,id);
+        this.getAccList().enqueue(t,this.compareAccounts(d));
+    }
+    public void createBankAccount(LocalDate d, Double ball){
+        int id = this.customerID;
+        account t = new account(ball,d,id);
+        this.getAccList().enqueue(t,this.compareAccounts(d));
     }
     //does not work
-    public void addTransaction(double m){
-        account t = (account) this.getAccList().getNode(1).getData();
-        t.transactionList.deposit(m,t);
+    public void deposit(double m, int x){
+        account t = (account) this.getAccList().getNode(x).getData();
+        t.deposit(m);
     }
+    public void withdraw(double m, int x){
+        account t = (account) this.getAccList().getNode(x).getData();
+        t.withdraw(m);
+    }
+
+
 
     public void setAddy(String addy) {
         this.addy = addy;
@@ -161,7 +174,7 @@ public class customer implements customerInterface{
         this.SSN = SSN;
     }
     public void setCustID(int idd){this.customerID=idd;}
-    public void setAccList(custPQLL list){this.accounts = list;}
+    public void setAccList(PQLL list){this.accounts = list;}
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -170,26 +183,38 @@ public class customer implements customerInterface{
 
 
 
-        //date of customer will be considered
-        //from the head node use the iterator from the LL class
-        //iterator trough the LL
-        //compare the date of the current node wanting to be added
-        //assign a protiry from there
 
-    //for the string input we need a method to go through the linked list of accounts and get the accounts
-                                    //^^^^^^^^^^^
-        public int compare(Date d, String ballance, custPQLL list){
+
+    //this will be used to compare the account objects in the PQLL accounts variable and used to compare the priorties
+    //will be used when creating and adding accounts
+        public int compareAccounts(LocalDate d) {
             //if list is empty retuns 1, highest priority
-            if(list.isEmpty()){return 1;}
+            if (this.accounts.isEmpty()) {
+                return 1;
+            }
+            int s =1;
+            PQLL.node current = this.accounts.getHead();
+            account curr;
+            TreeMap<LocalDate, Double> dateTree = new TreeMap<>();
 
-            custPQLL.node current = list.getHead();
 
-            //compare dates
-           // if(d.equals(current.get) )
-            //int index =0;
+            for (int x = 1; x <= this.accounts.getCount(); x++) {
+                curr = (account) current.getData();
+                dateTree.put(curr.dateCreated, curr.ballance);
+                current = current.getNext();
+                    }
+            dateTree.put(d,1.0);
+            for (Map.Entry<LocalDate, Double> entry : dateTree.entrySet()) {
+                System.out.println("Date: " + entry.getKey() + ", Ballance: " + entry.getValue());
+            }
+            for (LocalDate p : dateTree.navigableKeySet()) {
+                if(p.equals(d)){
+                    return s;
+                }
+                s++;
+            }
+            return s;
 
-            //if dates are same then compare ballances
-            return 0;
 
         }
 

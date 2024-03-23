@@ -1,16 +1,19 @@
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.TreeMap;
 public interface accountInterface {
 
     double ballance =0;
-    Date dateCreated = new Date();
+    LocalDate dateCreated = LocalDate.now();
      int customerID =0;
-    //list of transactions
-    public Date getDateCreated();
-    public double getBallance();
+
+
+    public LocalDate getDateCreated();
+    public double getBalance();
     public int getCustomerID();
-    public transactions getTransactionList();
-    public void setBallance(double ballance);
-    public void setDateCreated(Date dateCreated);
+    public TreeMap<Date,Double> getTransactionList();
+    public void setBalance(double ballance);
+    public void setDateCreated(LocalDate dateCreated);
     public void setCustoerID(int id);
 }

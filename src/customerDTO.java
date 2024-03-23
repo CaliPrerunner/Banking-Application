@@ -1,4 +1,7 @@
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class customerDTO {
 
@@ -12,7 +15,7 @@ public class customerDTO {
     private char gender;
     private int customerID;
     private Date dateCreated;
-    private custPQLL<account> accounts;
+    private PQLL<account> accounts;
 
     private String addy;
     //^linked list of addy <- ********implement after linked list object has been created***********
@@ -32,7 +35,7 @@ public class customerDTO {
         this.birthday = bday;
         this.gender = sex;
         this.customerID = (int) (Math.random() % 1000);
-        this.accounts = new custPQLL<account>();
+        this.accounts = new PQLL<account>();
         //later to implement: a checker to see if ID has been taken
     }
 
@@ -69,7 +72,7 @@ public class customerDTO {
     public String getUserName() {
         return userName;
     }
-    public custPQLL getAccList(){
+    public PQLL getAccList(){
         return this.accounts;
     }
     public String getCustBall(){
@@ -80,7 +83,7 @@ public class customerDTO {
             String ballList ="S:";
             for(int x=1; x<= this.accounts.getCount(); x++){
                 account t = (account) this.getAccList().getNode(x).getData();
-                ballList += String.valueOf(t.getBallance()) + " ";
+                ballList += String.valueOf(t.getBalance()) + " ";
 
             }
             return ballList;
@@ -94,7 +97,7 @@ public class customerDTO {
             double ballList =0;
             for(int x=1; x<= this.accounts.getCount(); x++){
                 account t = (account) this.getAccList().getNode(x).getData();
-                ballList += t.getBallance();
+                ballList += t.getBalance();
 
             }
             return ballList;
@@ -103,12 +106,13 @@ public class customerDTO {
     }
     public void createBankAccount(double m){
         int id = this.customerID;
-        account t = new account(m,id);
-        this.getAccList().enqueue(t,1);
+        LocalDate d = LocalDate.now();
+        account t = new account(m,d, id);
+        this.getAccList().enqueue(t,this.compareAccounts(d));
     }
-    public void addTransaction(double m){
+    public void deposit(double m){
         account t = (account) this.getAccList().getNode(1).getData();
-        t.transactionList.deposit(m,t);
+        t.deposit(m);
     }
     public void getAddy() {
         System.out.println("First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))));
@@ -161,6 +165,37 @@ public class customerDTO {
 
 
 
+    public int compareAccounts(LocalDate d) {
+        //if list is empty retuns 1, highest priority
+        if (this.accounts.isEmpty()) {
+            return 1;
+        }
+        int s =1;
+        PQLL.node current = this.accounts.getHead();
+        account curr;
+        TreeMap<LocalDate, Double> dateTree = new TreeMap<>();
+
+
+        for (int x = 1; x <= this.accounts.getCount(); x++) {
+            curr = (account) current.getData();
+            dateTree.put(curr.dateCreated, curr.ballance);
+            current = current.getNext();
+        }
+        dateTree.put(d,1.0);
+        for (Map.Entry<LocalDate, Double> entry : dateTree.entrySet()) {
+            System.out.println("Date: " + entry.getKey() + ", Ballance: " + entry.getValue());
+        }
+        for (LocalDate p : dateTree.navigableKeySet()) {
+            System.out.println("this is index: " +s);
+            if(p.equals(d)){
+                return s;
+            }
+            s++;
+        }
+        return s;
+
+
+    }
 
 
 

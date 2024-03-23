@@ -45,6 +45,32 @@ public class custDAO implements customerDAOInter {
         return null;
 
     }
+
+    @Override
+    public List<customer> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public int save(customer e) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int insert(customer e) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int update(customer e) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int delete(customer e) throws SQLException {
+        return 0;
+    }
+    /*
     public static String getInsert() {
 
         return INSERT_SQL;
@@ -104,4 +130,6 @@ public class custDAO implements customerDAOInter {
     public int delete(customer e) throws SQLException {
         return 0;
     }
+
+     */
 }
