@@ -42,6 +42,8 @@ david.withdraw(50.0,1);
         System.out.println("david's account list count:  "+david.getAccList().getCount());
         System.out.println("david account's : "+david.getCustAccList());
         System.out.println("david account total: "+david.getTotalCustBall());
+        System.out.println("david transaction total: " );
+        david.printTransactionList(1);
 
 
 

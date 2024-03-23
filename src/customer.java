@@ -142,6 +142,15 @@ public class customer implements customerInterface{
         account t = (account) this.getAccList().getNode(x).getData();
         t.withdraw(m);
     }
+    public void printTransactionList(int accountIndex) {
+        account t = (account) this.getAccList().getNode(accountIndex).getData();
+
+        for (Map.Entry<Date, Double> entry : t.getTransactionList().entrySet()) {
+            System.out.println("Date: " + entry.getKey() + " Transaction: " + entry.getValue());
+        }
+
+    }
+
 
 
 
