@@ -1,49 +1,45 @@
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.sql.PreparedStatement;
 
-public class custDAO implements customerDAOInter {
+public class custDAO implements custDAOI {
 
-    custDAO(){try {
 
-        Connection con = custDatabase.getDBConnection();
+      Connection connection = null;
+    PreparedStatement pStatement;
+    ResultSet result;
+     String url = databaseConnection.getURL();
+     String username = databaseConnection.getURL();
+     String pwd = databaseConnection.getURL();
+
+
+    custDAO(){
+        try {
+        connection = databaseConnection.getDBConnection();
 
     } catch (SQLException se) {
-        System.out.println(se.getMessage());
-    }        }
+        System.out.println(se.getMessage());}
+    }
 
     @Override
     public customer get(int id) throws SQLException {
-        /*
-        Connecion c = custDatabase.getDBConnection();
-        customer cust = null;
-        String fname="";
-        String lname="";
-        int idd=0;
-        custPQLL acc = null;
-        String sql = getSelect();
 
-        PreparedStatement ps = c.prepareStatement(sql);
-        ps.setInt(1,id);
-        ResultSet result = ps.executeQuery();
+        String sql = "SELECT customerID, first_name, last_name, ssn,userName,passworrd, phone, bday, gender,dateCreated, address FROM customers WHERE id = ?";
 
-        if(result.next()){
-             idd = result.getInt("customerID");
-             acc = result.getObject(1,custPQLL);
-             fname = result.getString("firstName");
-             lname = result.getString("lastName");
+        pStatement = connection.prepareStatement(sql);
+        pStatement.setInt(1,id);
+        result = pStatement.executeQuery();
+
+        customer updatedEmp = null;
+        if (result.next()) {
+            customer e = new customer();
+            //int customerID,String fn, String ln, String ssn, String userN, String passw, String phon, String bday, char sex,LocalDate date,String addy
+            updatedEmp = new customer( result.getInt("customerID"), result.getString("first_name"), result.getString("last_name"), result.getString("ssn"),result.getString("userName"), result.getString("passworrd"), result.getString("phone"),result.getString("bday"),result.getString("gender"), result.getDate("dateCreated").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),result.getString("address"));
         }
 
-         cust.setFirstName(fname);
-        cust.setCustID(idd);
-        cust.setLastName(lname);
-        cust.setAccList(acc);
-        return cust;
-
-
-         */
-        return null;
-
+        return updatedEmp;
     }
 
     @Override
@@ -70,6 +66,64 @@ public class custDAO implements customerDAOInter {
     public int delete(customer e) throws SQLException {
         return 0;
     }
+
+
+        /*
+        Connection c = custDatabase.getDBConnection();
+        customer cust = null;
+        String fname="";
+        String lname="";
+        int idd=0;
+        custPQLL acc = null;
+        String sql = getSelect();
+
+        PreparedStatement ps = c.prepareStatement(sql);
+        ps.setInt(1,id);
+        ResultSet result = ps.executeQuery();
+
+        if(result.next()){
+             idd = result.getInt("customerID");
+             acc = result.getObject(1,custPQLL);
+             fname = result.getString("firstName");
+             lname = result.getString("lastName");
+        }
+
+         cust.setFirstName(fname);
+        cust.setCustID(idd);
+        cust.setLastName(lname);
+        cust.setAccList(acc);
+        return cust;
+
+
+        return null;
+         @Override
+    public List<customer> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public int save(customer e) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int insert(customer e) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int update(customer e) throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public int delete(customer e) throws SQLException {
+        return 0;
+    }
+  */
+    }
+
+
     /*
     public static String getInsert() {
 
@@ -132,4 +186,4 @@ public class custDAO implements customerDAOInter {
     }
 
      */
-}
+

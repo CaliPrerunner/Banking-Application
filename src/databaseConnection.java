@@ -1,21 +1,29 @@
 import java.sql.*;
 
-public class custDatabase {
+public class databaseConnection {
 
-    private static String url = "jdbc:root@localhost:3306";
+    private static String url = "jdbc:mysql://localhost:3306/CS413";
     private static String usr = "root";
     private static String password = "password";
-    private static final String INSERT_SQL = "INSERT INTO customer customerID, accounts, firstName, lastName VALUES (?, ?)";
-    private static final String SELECT_SQL_BYID = "SELECT customerID, accounts, firstName, lastName WHERE id = ?";
-    private static final String UPDATE_SQL = "UPDATE customerID, accounts, firstName, lastName WHERE id = ?";
+    private static final String INSERT_SQL = "INSERT INTO customers (first_name,last_name,ssn,userName,passworrd,phone,bday,gender,dateCreated,address";
+           // FIRSURE OUT HOW TO IMPUT THE VALUES: ----------+"VALUES ("fname, );
+    private static final String SELECT_SQL_BYID = "SELECT * FROM customers WHERE id = ?";
+    private static final String UPDATE_SQL = "UPDATE customer SET username = ?, email = ?, phone = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM customer WHERE id = ?";
 
-    private custDatabase(){
+    private databaseConnection(){
 
     }
     public static Connection getDBConnection() throws SQLException{
         Connection connection = null;
-        connection = DriverManager.getConnection(url,usr,password);
+        try{ connection = DriverManager.getConnection(url,usr,password);
+
+        }catch(SQLException e){
+            System.out.println("MySQL JDBC Driver not found.");
+            //e.printStackTrace();
+
+        }
+
         return connection;
     }
     public static String getInsert() {

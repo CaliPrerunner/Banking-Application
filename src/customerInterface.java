@@ -21,7 +21,7 @@ public interface customerInterface {
 
     public void createAndSetCustomerID();
     public void setFirstName(String firstName);
-    public void setGender(char gender) ;
+    public void setGender(String gender) ;
 
     public void setLastName(String lastName) ;
 
@@ -46,7 +46,7 @@ public interface customerInterface {
     public String getFirstName();
     public String getSSN();
     public String getLastName() ;
-    public char getGender() ;
+    public String getGender() ;
     public String getBirthday() ;
     public String getPassword() ;
     public String getPhone() ;

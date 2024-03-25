@@ -2,14 +2,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class accDAO implements accDAOInter {
+public class accDAO implements DAOInterface<account> {
 
     static String url = accDatabase.getURL();
     static String username = accDatabase.getURL();
     static String pwd = accDatabase.getURL();
     accDAO(){try {
 
-        Connection con = custDatabase.getDBConnection();
+        Connection con = databaseConnection.getDBConnection();
 
     } catch (SQLException se) {
         System.out.println(se.getMessage());

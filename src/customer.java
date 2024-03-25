@@ -12,7 +12,7 @@ public class customer implements customerInterface{
     private String password;
     private String phone;
     private String birthday;
-    private char gender;
+    private String gender;
     private LocalDate dateCreated;
     private PQLL accounts;
     int customerID;
@@ -24,7 +24,7 @@ public class customer implements customerInterface{
     public customer(){
 
     }
-    public customer(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, char sex) {
+    public customer(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, String sex) {
         this.dateCreated = LocalDate.now();
         this.firstName = fn;
         this.lastName = ln;
@@ -36,6 +36,22 @@ public class customer implements customerInterface{
         this.birthday = bday;
         this.gender = sex;
         this.customerID = (int) (Math.random() * 1000);
+        this.accounts = new PQLL();
+
+        //later to implement: a checker to see if ID has been taken
+    }
+    public customer(int customerID,String fn, String ln, String ssn, String userN, String passw, String phon, String bday, String sex,LocalDate date,String addy) {
+        this.dateCreated = date;
+        this.firstName = fn;
+        this.lastName = ln;
+        this.SSN = ssn;
+        this.addy = addy;
+        this.userName = userN;
+        this.password = passw;
+        this.phone = phon;
+        this.birthday = bday;
+        this.gender = sex;
+        this.customerID = customerID;
         this.accounts = new PQLL();
 
         //later to implement: a checker to see if ID has been taken
@@ -53,7 +69,7 @@ public class customer implements customerInterface{
     public String getLastName() {
         return lastName;
     }
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
     public String getBirthday() {
@@ -167,7 +183,7 @@ public class customer implements customerInterface{
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
     public void setLastName(String lastName) {
