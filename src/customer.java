@@ -56,6 +56,24 @@ public class customer implements customerInterface{
 
         //later to implement: a checker to see if ID has been taken
     }
+
+    public void printCustomerDetails() {
+        System.out.println("CustomerID: " + customerID);
+        System.out.println("First Name: " + firstName);
+        System.out.println("Last Name: " + lastName);
+        System.out.println("SSN: " + SSN);
+        System.out.println("User Name: " + userName);
+        System.out.println("Password: " + password);
+        System.out.println("Phone: " + phone);
+        System.out.println("Birthday: " + birthday);
+        System.out.println("Gender: " + gender);
+        System.out.println("Date Created: " + dateCreated);
+        System.out.println("Address: " + addy);
+    }
+
+
+
+
     //normal getters/setters
     public int getCustomerID() {
         return customerID;

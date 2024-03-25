@@ -20,6 +20,11 @@ public class Main {
         //the interface of custDAO creates a new cust dao
         custDAOI test = new custDAO();
         customer testc =  test.get(111);
+        testc.printCustomerDetails();
+
+        accountDAOI acctest = new accountDAO();
+        account testa = acctest.get(111);
+       testa.printAccountDetails();
 
         //ObjectMapper om = new ObjectMapper();
         //String jsonString = "{"name":"John Doe","email":"jdoe@sfsu.edu"}"; YOUR_OBJECT obj = om.readValue(jsonString, YOUR_OBJECT.class);

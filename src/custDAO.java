@@ -26,7 +26,9 @@ public class custDAO implements custDAOI {
     @Override
     public customer get(int id) throws SQLException {
 
-        String sql = "SELECT customerID, first_name, last_name, ssn,userName,passworrd, phone, bday, gender,dateCreated, address FROM customers WHERE id = ?";
+        //this is the SQL command that specifiying what data is is selecting and from which table it is coming from by the FROM command. WHERE points to the key that identifies the row in the SQL databse
+        String sql = "SELECT customerID, first_name, last_name, ssn,userName,passworrd, phone, bday, gender,dateCreated, address FROM customers WHERE customerID = ?";
+        //pStatement = connection.prepareStatement(databaseConnection.getSelect());
 
         pStatement = connection.prepareStatement(sql);
         pStatement.setInt(1,id);
@@ -35,8 +37,17 @@ public class custDAO implements custDAOI {
         customer updatedEmp = null;
         if (result.next()) {
             customer e = new customer();
-            //int customerID,String fn, String ln, String ssn, String userN, String passw, String phon, String bday, char sex,LocalDate date,String addy
-            updatedEmp = new customer( result.getInt("customerID"), result.getString("first_name"), result.getString("last_name"), result.getString("ssn"),result.getString("userName"), result.getString("passworrd"), result.getString("phone"),result.getString("bday"),result.getString("gender"), result.getDate("dateCreated").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),result.getString("address"));
+            updatedEmp = new customer( result.getInt("customerID"),
+                    result.getString("first_name"),
+                    result.getString("last_name"),
+                    result.getString("ssn"),
+                    result.getString("userName"),
+                    result.getString("passworrd"),
+                    result.getString("phone"),
+                    result.getString("bday"),
+                    result.getString("gender"),
+                    result.getDate("dateCreated").toLocalDate(),
+                    result.getString("address"));
         }
 
         return updatedEmp;

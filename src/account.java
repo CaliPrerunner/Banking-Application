@@ -103,7 +103,12 @@ public class account implements accountInterface{
             System.out.println("Withdrawal amount must be positive");
         }
     }
+    public void printAccountDetails() {
+        System.out.println("Account ID: " + customerID);
+        System.out.println("Balance: " + balance);
+        System.out.println("Date Opened: " + dateCreated);
 
+    }
 
 
 
