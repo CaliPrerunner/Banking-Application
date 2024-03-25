@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class customerDTO {
+public class customerDTO implements customerInterface{
 
         private String firstName;
         private String lastName;
@@ -12,7 +12,7 @@ public class customerDTO {
         private String password;
         private String phone;
         private String birthday;
-        private char gender;
+        private String gender;
         private LocalDate dateCreated;
         private PQLL accounts;
         int customerID;
@@ -24,7 +24,8 @@ public class customerDTO {
     public customerDTO(){
 
     }
-    public customerDTO(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, char sex) {
+    //constructor that generates custID and gets the local date of now
+    public customerDTO(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, String sex) {
         this.dateCreated = LocalDate.now();
         this.firstName = fn;
         this.lastName = ln;
@@ -40,7 +41,8 @@ public class customerDTO {
 
         //later to implement: a checker to see if ID has been taken
     }
-    public customerDTO(int customerID,String fn, String ln, String ssn, String userN, String passw, String phon, String bday, char sex,LocalDate date,String addy) {
+    //constructor for all var's
+    public customerDTO(int customerID,String fn, String ln, String ssn, String userN, String passw, String phon, String bday, String sex,LocalDate date,String addy) {
         this.dateCreated = date;
         this.firstName = fn;
         this.lastName = ln;
@@ -69,7 +71,7 @@ public class customerDTO {
         public String getLastName() {
         return lastName;
     }
-        public char getGender() {
+        public String getGender() {
         return gender;
     }
         public String getBirthday() {
@@ -84,18 +86,17 @@ public class customerDTO {
         public String getUserName() {
         return userName;
     }
-        public void getAddy() {
-        System.out.println("First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))));
-        System.out.println("Street:" + this.addy.substring((this.addy.indexOf("STR: ") + 4), (this.addy.indexOf("C:"))) + " City: " + this.addy.substring((this.addy.indexOf("C:") + 2), (this.addy.indexOf("ST:"))) + "\nState: " + this.addy.substring((this.addy.indexOf("ST:") + 3), (this.addy.indexOf("Z:"))) + " Zip Code: " + this.addy.substring((this.addy.indexOf("Z:") + 2), (this.addy.length())));
-    }
-        //return a human readable string representing of address
+    //return a human readable string representing of address
         public String returnAddy(){
         String addy = "First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))) +"Street:" + this.addy.substring((this.addy.indexOf("STR: ") + 4), (this.addy.indexOf("C:"))) + " City: " + this.addy.substring((this.addy.indexOf("C:") + 2), (this.addy.indexOf("ST:"))) + "\nState: " + this.addy.substring((this.addy.indexOf("ST:") + 3), (this.addy.indexOf("Z:"))) + " Zip Code: " + this.addy.substring((this.addy.indexOf("Z:") + 2), (this.addy.length()));
         return addy;
     }
+    public String getAddy(){return addy;}
 
 
-        //account logic
+
+
+    //account logic
 
         public PQLL getAccList(){
         return this.accounts;
@@ -183,7 +184,10 @@ public class customerDTO {
         public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-        public void setGender(char gender) {
+
+
+
+    public void setGender(String gender) {
         this.gender = gender;
     }
         public void setLastName(String lastName) {

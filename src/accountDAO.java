@@ -1,7 +1,5 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.List;
 
 public class accountDAO implements accountDAOI{
@@ -9,12 +7,12 @@ public class accountDAO implements accountDAOI{
     Connection connection = null;
     PreparedStatement pStatement;
     ResultSet result;
-    String url = databaseConnection.getURL();
-    String username = databaseConnection.getURL();
-    String pwd = databaseConnection.getURL();
+    String url = custDatabaseConnection.getURL();
+    String username = custDatabaseConnection.getURL();
+    String pwd = custDatabaseConnection.getURL();
     accountDAO(){
         try {
-            connection = databaseConnection.getDBConnection();
+            connection = custDatabaseConnection.getDBConnection();
 
         } catch (SQLException se) {
             System.out.println(se.getMessage());}
@@ -22,10 +20,8 @@ public class accountDAO implements accountDAOI{
     @Override
     public account get(int id) throws SQLException {
 
-        //this is the SQL command that specifiying what data is is selecting and from which table it is coming from by the FROM command. WHERE points to the key that identifies the row in the SQL database
-        String sql = "SELECT custID, balance, date_created FROM account WHERE custID = ?";
 
-        pStatement = connection.prepareStatement(sql);
+        pStatement = connection.prepareStatement(accountDatabaseConnection.getSelect());
         pStatement.setInt(1,id);
         result = pStatement.executeQuery();
 
@@ -43,9 +39,25 @@ public class accountDAO implements accountDAOI{
 
     }
 
+    //tienes que connectar el public key del customer con el public key del accoututns
     @Override
-    public List<account> getAll() throws SQLException {
-        return null;
+    public PQLL<account> getAll() throws SQLException {
+
+        PQLL<account> set = new PQLL<>();
+        Statement stm = connection.createStatement();
+        ResultSet result = stm.executeQuery(accountDatabaseConnection.getListallSql());
+        customer c = new customer();
+        c.createList();
+
+        while(result.next()){
+            int id = result.getInt("custID");
+            double ball=   result.getDouble("balance");
+            LocalDate date=  result.getDate("date_created").toLocalDate();
+            c.createBankAccount(date,ball,id);
+        }
+        int cp = 1;
+        return c.getAccounts();
+
     }
 
     @Override
@@ -53,18 +65,47 @@ public class accountDAO implements accountDAOI{
         return 0;
     }
 
+    // return 1 = sucess return 0=nothing changed
     @Override
     public int insert(account e) throws SQLException {
-        return 0;
+        int res = -1;
+        pStatement = connection.prepareStatement(accountDatabaseConnection.getInsert());
+        pStatement.setInt(1, e.getCustomerID());
+        pStatement.setDouble(2, e.getBalance());
+        pStatement.setDate(3, Date.valueOf(e.getDateCreated()));
+
+        res = pStatement.executeUpdate();
+
+        return res;
     }
 
+    //no se pq estaba sin funcionando creo q es por el ai pk set up
     @Override
     public int update(account e) throws SQLException {
-        return 0;
+
+        int result = -1;
+
+        pStatement = connection.prepareStatement(accountDatabaseConnection.getUpdate());
+        pStatement.setInt(1, e.getCustomerID());
+        pStatement.setDouble(2, e.getBalance());
+        pStatement.setDate(3, Date.valueOf(e.getDateCreated()));
+//algo raro pq no hay 12 indice en la tabla de SQL
+        pStatement.setInt(4,0);
+        result = pStatement.executeUpdate();
+
+        return result;
+
     }
 
     @Override
     public int delete(account e) throws SQLException {
-        return 0;
+        int res = -1;
+
+        pStatement = connection.prepareStatement(accountDatabaseConnection.getDelete());
+        pStatement.setInt(1,e.getCustomerID());
+        res = pStatement.executeUpdate();
+
+        return res;
+
     }
 }

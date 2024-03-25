@@ -9,7 +9,7 @@ public class accDAO implements DAOInterface<account> {
     static String pwd = accDatabase.getURL();
     accDAO(){try {
 
-        Connection con = databaseConnection.getDBConnection();
+        Connection con = custDatabaseConnection.getDBConnection();
 
     } catch (SQLException se) {
         System.out.println(se.getMessage());
@@ -22,7 +22,7 @@ public class accDAO implements DAOInterface<account> {
     }
 
     @Override
-    public List<account> getAll() throws SQLException {
+    public PQLL<account> getAll() throws SQLException {
         return null;
     }
 

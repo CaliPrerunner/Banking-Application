@@ -51,8 +51,8 @@ public interface customerInterface {
     public String getPassword() ;
     public String getPhone() ;
     public String getUserName() ;
-    public void getAddy();
-    public String returnAddy();
+    public String getAddy();
+
 
 
 

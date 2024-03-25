@@ -1,17 +1,21 @@
 import java.sql.*;
 
-public class databaseConnection {
+public class custDatabaseConnection {
 
     private static String url = "jdbc:mysql://localhost:3306/CS413";
     private static String usr = "root";
     private static String password = "password";
-    private static final String INSERT_SQL = "INSERT INTO customers (first_name,last_name,ssn,userName,passworrd,phone,bday,gender,dateCreated,address";
+    //sql commands to insert given values into the columns and the ? are represenative of the data we wil put in with the prepared statment
+    private static final String INSERT_SQL = "INSERT INTO customers (customerID,first_name,last_name,ssn,userName,passworrd,phone,bday,gender,dateCreated,address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
            // FIRSURE OUT HOW TO IMPUT THE VALUES: ----------+"VALUES ("fname, );
-    private static final String SELECT_SQL_BYID = "SELECT * FROM customers WHERE id = ?";
-    private static final String UPDATE_SQL = "UPDATE customer SET username = ?, email = ?, phone = ? WHERE id = ?";
-    private static final String DELETE_SQL = "DELETE FROM customer WHERE id = ?";
+    private static final String SELECT_SQL_BYID = "SELECT * FROM customers WHERE customerID = ?";
+    //sql update command
+    private static final String UPDATE_SQL = "UPDATE customers SET customerID = ?, first_name = ?, last_name = ?, ssn = ?, userName = ?, passworrd = ?, phone = ?,bday = ?, gender = ?, dateCreated = ?, address=? WHERE customerID =?";
 
-    private databaseConnection(){
+    private static final String DELETE_SQL = "DELETE FROM customers WHERE customerID = ?";
+    private static final String LISTALL_SQL = "SELECT * FROM customers";
+
+    private custDatabaseConnection(){
 
     }
     public static Connection getDBConnection() throws SQLException{
@@ -60,8 +64,8 @@ public class databaseConnection {
 
         return password;
     }
-
-
-
+    public static String getListallSql(){
+        return LISTALL_SQL;
+    }
 
 }

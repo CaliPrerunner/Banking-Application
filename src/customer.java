@@ -24,6 +24,14 @@ public class customer implements customerInterface{
     public customer(){
 
     }
+    //contructor for accountDAO lis all
+
+    public customer(int id, String lastName){
+        this.customerID = id;
+        this.lastName =lastName;
+        this.dateCreated = LocalDate.of(2024,03,24);
+    }
+    //constructor that generates ID and gets the local date of NOW
     public customer(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, String sex) {
         this.dateCreated = LocalDate.now();
         this.firstName = fn;
@@ -102,7 +110,10 @@ public class customer implements customerInterface{
     public String getUserName() {
         return userName;
     }
-    public void getAddy() {
+    public String getAddy(){return addy;}
+    public LocalDate getDateCreated(){return dateCreated;}
+    public PQLL getAccounts(){return accounts;}
+    public void printAddy() {
         System.out.println("First name: " + this.addy.substring((this.addy.indexOf("FN:") + 3), (this.addy.indexOf("STR:"))) + " Last name: " + this.addy.substring((this.addy.indexOf("LN:") + 3), (this.addy.indexOf("FN:"))));
         System.out.println("Street:" + this.addy.substring((this.addy.indexOf("STR: ") + 4), (this.addy.indexOf("C:"))) + " City: " + this.addy.substring((this.addy.indexOf("C:") + 2), (this.addy.indexOf("ST:"))) + "\nState: " + this.addy.substring((this.addy.indexOf("ST:") + 3), (this.addy.indexOf("Z:"))) + " Zip Code: " + this.addy.substring((this.addy.indexOf("Z:") + 2), (this.addy.length())));
     }
@@ -118,6 +129,7 @@ public class customer implements customerInterface{
     public PQLL getAccList(){
         return this.accounts;
     }
+    public void setAccList(account a){this.accounts.enqueue(a,1);}
     //returns how many accounts the customer has
     public int getNumOfAccs(){return this.accounts.getCount();}
     //returns a sting of account of a customer ballance via a string
@@ -165,7 +177,14 @@ public class customer implements customerInterface{
     public void createBankAccount(LocalDate d, Double ball){
         int id = this.customerID;
         account t = new account(ball,d,id);
-        this.getAccList().enqueue(t,this.compareAccounts(d));
+        //fix this
+    }
+    public void createBankAccount(LocalDate d, Double ball, int id){
+       this.customerID = id;
+        account t = new account(ball,d,id);
+
+            this.getAccList().enqueue(t, this.compareAccounts(d));
+
     }
     //does not work
     public void deposit(double m, int x){
@@ -221,6 +240,9 @@ public class customer implements customerInterface{
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    public void createList(){
+        this.accounts = new PQLL<account>();
+    }
 
 
 
@@ -231,6 +253,10 @@ public class customer implements customerInterface{
     //this will be used to compare the account objects in the PQLL accounts variable and used to compare the priorties
     //will be used when creating and adding accounts
         public int compareAccounts(LocalDate d) {
+
+        if(this.accounts == null){
+            return 1;
+        }
             //if list is empty retuns 1, highest priority
             if (this.accounts.isEmpty()) {
                 return 1;
