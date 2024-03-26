@@ -78,6 +78,21 @@ public class customer implements customerInterface{
         System.out.println("Date Created: " + dateCreated);
         System.out.println("Address: " + addy);
     }
+    public String getCustomerDetails() {
+        String output ="";
+       output = ("CustomerID: " + customerID);
+        output +=("First Name: " + firstName);
+        output +=("Last Name: " + lastName);
+        output +=("SSN: " + SSN);
+        output +=("User Name: " + userName);
+        output +=("Password: " + password);
+        output +=("Phone: " + phone);
+        output +=("Birthday: " + birthday);
+        output +=("Gender: " + gender);
+        output +=("Date Created: " + dateCreated);
+        output +=("Address: " + addy);
+        return output;
+    }
 
 
 
