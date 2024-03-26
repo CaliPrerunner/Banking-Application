@@ -81,16 +81,16 @@ public class customer implements customerInterface{
     public String getCustomerDetails() {
         String output ="";
        output = ("CustomerID: " + customerID);
-        output +=("First Name: " + firstName);
-        output +=("Last Name: " + lastName);
-        output +=("SSN: " + SSN);
-        output +=("User Name: " + userName);
-        output +=("Password: " + password);
-        output +=("Phone: " + phone);
-        output +=("Birthday: " + birthday);
-        output +=("Gender: " + gender);
-        output +=("Date Created: " + dateCreated);
-        output +=("Address: " + addy);
+        output +=("\nFirst Name: " + firstName);
+        output +=("\nLast Name: " + lastName);
+        output +=("\nSSN: " + SSN);
+        output +=("\nUser Name: " + userName);
+        output +=("\nPassword: " + password);
+        output +=("\nPhone: " + phone);
+        output +=("\nBirthday: " + birthday);
+        output +=("\nGender: " + gender);
+        output +=("\nDate Created: " + dateCreated);
+        output +=("\nAddress: " + addy);
         return output;
     }
 
