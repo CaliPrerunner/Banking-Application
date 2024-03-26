@@ -26,7 +26,7 @@ public class window implements ActionListener {
 
     public void startGUI(){
 
-        //workds but fidure out the sixing and how to make the sixing dynamic
+
 
         mainWindow.setTitle("Welcome");//Setting title of JFrame
         mainWindow.getContentPane().setLayout(null);//Setting Layout
@@ -35,8 +35,8 @@ public class window implements ActionListener {
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Setting default close operation
         mainWindow.add(customerLoginBUTT);
         mainWindow.add(employeeLoginBUTT);
-        customerLoginBUTT.setBounds(100, 100, 140, 30);
-        employeeLoginBUTT.setBounds(210, 100, 140, 30);
+        customerLoginBUTT.setBounds(60, 100, 140, 30);
+        employeeLoginBUTT.setBounds(200, 100, 140, 30);
         customerLoginBUTT.addActionListener(customerLoginPage);
 
 
