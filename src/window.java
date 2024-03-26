@@ -14,12 +14,18 @@ public class window implements ActionListener {
     JButton find = new JButton("Search");
     JButton employeeLoginBUTT = new JButton("Employee Login");
     JButton customerLoginBUTT = new JButton("Customer Login");
+    JButton backButtCust = new JButton("Back");
+    JButton backButtEmp = new JButton("Back");
+    JButton loginBUTT = new JButton("Login");
     JTextField userInput = new JTextField(10);
+    JTextField emploginInputU = new JTextField(10);
+    JTextField emploginInputP = new JTextField(10);
     CardLayout layout = new CardLayout();
 
     JPanel homePanel = new JPanel();
     JPanel customerLoginPanel = new JPanel();
     JPanel employeeLoginPanel = new JPanel();
+    JPanel employeeViewPanel = new JPanel();
 
 
     //JPanel custLogin = new JFrame("Customer Login");
@@ -34,21 +40,52 @@ public class window implements ActionListener {
 
         mainWindow.setTitle("Welcome");//Setting title of JFrame
         mainWindow.getContentPane().setLayout(null);//Setting Layout
-        mainWindow.setBounds(200, 200, 400, 500);
+        mainWindow.setBounds(200, 200, 700, 700);
         mainWindow.setVisible(true);//Setting visibility
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Setting default close operation
 
 
         homePanel.setVisible(true);//Setting visibility
-        homePanel.setBounds(200, 200, 400, 500);//Setting Location and Size
+        homePanel.setBounds(0, 200, 400, 500);//Setting Location and Size
+        employeeLoginPanel.setBounds(0,0,500,500);
         homePanel.add(customerLoginBUTT);
         homePanel.add(employeeLoginBUTT);
+        mainWindow.add(homePanel);
         customerLoginBUTT.setBounds(60, 100, 140, 30);
         employeeLoginBUTT.setBounds(200, 100, 140, 30);
+
+        //main log in page
+        backButtCust.setBounds(50, 100, 100, 30);
+        backButtEmp.setBounds(50, 100, 100, 30);
         customerLoginBUTT.addActionListener(customerLoginPage);
         employeeLoginBUTT.addActionListener(employeeLoginPage);
+        backButtCust.addActionListener(backToHomePagecust);
+        backButtEmp.addActionListener(backToHomePageEmp);
+        employeeLoginPanel.add(backButtEmp);
+        customerLoginPanel.add(backButtCust);
+        mainWindow.add(employeeLoginPanel);
+        mainWindow.add(customerLoginPanel);
 
-        mainWindow.add(homePanel );
+        //employee login
+        mainWindow.add(employeeViewPanel);
+        employeeViewPanel.setVisible(false);
+        employeeLoginPanel.setVisible(false);
+        emploginInputU.setBounds(100,500,200,30);
+        emploginInputP.setBounds(100,20,200,30);
+        loginBUTT.setBounds(300, 100, 100, 30);
+        loginBUTT.addActionListener(employeeView);
+        employeeLoginPanel.add(loginBUTT);
+        employeeLoginPanel.add(emploginInputU);
+        employeeLoginPanel.add(emploginInputP);
+
+        employeeViewPanel.add(userInput);
+        find.setBounds(300, 100, 100, 30);
+        find.addActionListener(findCustomer);
+        userInput.setBounds(100,100,200,30);
+        output.setBounds(100,150,200,200);
+        output.setWrapStyleWord(true);
+        output.setLineWrap(true);
+        output.setEditable(false);
 
 
 
@@ -69,19 +106,24 @@ public class window implements ActionListener {
          */
 
     }
+    ActionListener employeeView = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           // customerLoginPanel.setLayout(null);//Setting Layout
+            homePanel.setVisible(false);
+            employeeLoginPanel.setVisible(false);
+
+
+            employeeViewPanel.setVisible(true);
+
+        }
+    };
     ActionListener employeeLoginPage = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          mainWindow.remove(homePanel);
-          mainWindow.add(employeeLoginPanel);
-            employeeLoginPanel.setBounds(50,50,300,300);
+            customerLoginPanel.setLayout(null);//Setting Layout
+            homePanel.setVisible(false);
             employeeLoginPanel.setVisible(true);
-
-            JButton backButt = new JButton("Back");
-            customerLoginPanel.add(backButt);
-            backButt.setBounds(100, 100, 100, 30);
-            backButt.addActionListener(backToHomePage);
-
         }
     };
     //action listener used to find the user
@@ -106,16 +148,12 @@ public class window implements ActionListener {
     ActionListener customerLoginPage = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            homePanel.setVisible(false);
             customerLoginPanel.setLayout(null);//Setting Layout
-            mainWindow.remove(homePanel);
-            mainWindow.add(customerLoginPanel);
             customerLoginPanel.setBounds(50,50,300,300);
             customerLoginPanel.setVisible(true);
 
-            JButton backButt = new JButton("Back");
-            customerLoginPanel.add(backButt);
-            backButt.setBounds(100, 100, 100, 30);
-            backButt.addActionListener(backToHomePage);
+
 
 
 
@@ -124,11 +162,22 @@ public class window implements ActionListener {
     };
 
     //brings homepage back to visilbe and dispose current widow
-    ActionListener backToHomePage = new ActionListener() {
+    ActionListener backToHomePagecust = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             customerLoginPanel.setVisible(false);
-            mainWindow.add(homePanel);
+            homePanel.setVisible(true);
+        }
+    };
+     ActionListener backToHomePageEmp = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            employeeLoginPanel.setVisible(false);
+            homePanel.setVisible(true);
+
+
+
         }
     };
     @Override
