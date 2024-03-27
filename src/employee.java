@@ -6,8 +6,9 @@ public class employee implements employeeInterface{
     private String eMail;
     private String department;
     private String username;
+    private String pass;
     private String phone;
-    private char gender;
+    private String gender;
     private double salary;
 
     public employee(){
@@ -21,7 +22,7 @@ public class employee implements employeeInterface{
         this.phone = phone;
     }
 
-    public employee(int id, String fn, String ln, String bday, String email, String dpt, char gen, double sal, String user, String phone){
+    public employee(int id, String fn, String ln, String bday, String email, String dpt, String user, String password, String phone,String gen, double sal){
         this.employeeID = id;
         this.firstName = fn;
         this.lastName = ln;
@@ -32,6 +33,7 @@ public class employee implements employeeInterface{
         this.salary = sal;
         this.username = user;
         this.phone = phone;
+        this.pass = password;
     }
 
     public String getFName() {
@@ -52,7 +54,7 @@ public class employee implements employeeInterface{
     public String getDepartment() {
         return this.department;
     }
-    public char getGender() {
+    public String getGender() {
         return this.gender;
     }
     public double getSalary() {
@@ -64,6 +66,7 @@ public class employee implements employeeInterface{
     public String getPhone() {
         return this.phone;
     }
+    public String getPass (){return this.pass;}
 
     public void setFName(String fn){this.firstName = fn;}
     public void setLName(String ln){this.lastName = ln;}
@@ -71,7 +74,7 @@ public class employee implements employeeInterface{
     public void setBday(String bday){this.bday = bday;}
     public void setEmail(String email){this.eMail = email;}
     public void setDepartment(String dpt){this.department = dpt;}
-    public void setGender(char gen){this.gender = gen;}
+    public void setGender(String gen){this.gender = gen;}
     public void setSalary(double sal){this.salary = sal;}
     public void setUsername(String username) {this.username = username;}
     public void setPhone(String phone) {this.phone = phone;}

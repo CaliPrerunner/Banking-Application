@@ -23,14 +23,15 @@ public class empDAO implements empDAOI{
         pStatement.setInt(1,id);
         result = pStatement.executeQuery();
 
-        account updatedEmp = null;
+        employee updatedEmp = null;
         if (result.next()) {
-            account e = new account();
+            employee e = new employee();
             //the names in the parentesis corresponds to the names of the columns in the SQL database
             //mysql looks for these columns in the parethesis
-            updatedEmp = new employee( result.getDouble("balance"),
-                    result.getDate("date_created").toLocalDate(),
-                    result.getInt("custID"));
+            updatedEmp = new employee( result.getInt("employeeID"),
+                    result.getString("first_name"), result.getString("last_name"),result.getString("bday"), result.getString("email"),
+                    result.getString("department"), result.getString("user"),result.getString("password"), result.getString("phone"),
+                    result.getString("gender"), result.getDouble("salary"));
         }
 
         return updatedEmp;

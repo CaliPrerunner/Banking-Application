@@ -100,32 +100,29 @@ public class window implements ActionListener {
 
 
 
-//employee home page
-        /*
-        mainWindow.add(find);
-        find.setBounds(300, 100, 100, 30);
-        find.addActionListener(findCustomer);
-        mainWindow.add(userInput);
-        userInput.setBounds(100,100,200,30);
-        output.setBounds(100,150,200,200);
-        mainWindow.add(output);
-        output.setWrapStyleWord(true);
-        output.setLineWrap(true);
-        output.setEditable(false);
 
-         */
 
     }
     ActionListener employeeView = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("alkjhsfd");
-           // customerLoginPanel.setLayout(null);//Setting Layout
-            //homePanel.setVisible(false);
-            employeeLoginPanel.setVisible(false);
-            mainWindow.revalidate();
-            mainWindow.repaint();
-            employeeViewPanel.setVisible(true);
+
+            String ID = emploginInputU.getText();
+            int id = Integer.parseInt(ID);
+            String pass = emploginInputP.getText();
+
+            empDAO emp = new empDAO();
+            employee ep = new employee();
+            try {
+                ep = emp.get(id);
+            } catch (SQLException ex) {throw new RuntimeException(ex);}
+            if(ep.getPass().equals(pass)){
+                employeeLoginPanel.setVisible(false);
+                mainWindow.revalidate();
+                mainWindow.repaint();
+                employeeViewPanel.setVisible(true);
+            }
+
 
         }
     };
@@ -135,6 +132,9 @@ public class window implements ActionListener {
             customerLoginPanel.setLayout(null);//Setting Layout
             homePanel.setVisible(false);
             employeeLoginPanel.setVisible(true);
+
+
+
         }
     };
     //action listener used to find the user
