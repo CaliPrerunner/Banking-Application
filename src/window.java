@@ -25,7 +25,9 @@ public class window implements ActionListener {
     JPanel homePanel = new JPanel();
     JPanel customerLoginPanel = new JPanel();
     JPanel employeeLoginPanel = new JPanel();
-    JPanel employeeViewPanel = new JPanel();
+    JFrame employeeViewPanel = new JFrame();
+
+    JLabel findcustL = new JLabel("Find Customer by customer ID");
 
 
     //JPanel custLogin = new JFrame("Customer Login");
@@ -66,8 +68,12 @@ public class window implements ActionListener {
         mainWindow.add(employeeLoginPanel);
         mainWindow.add(customerLoginPanel);
 
+
+
         //employee login
-        mainWindow.add(employeeViewPanel);
+       employeeViewPanel.setBounds(200, 200, 700, 700);
+        employeeViewPanel.getContentPane().setLayout(null);//Setting Layout
+
         employeeViewPanel.setVisible(false);
         employeeLoginPanel.setVisible(false);
         emploginInputU.setBounds(100,500,200,30);
@@ -79,6 +85,10 @@ public class window implements ActionListener {
         employeeLoginPanel.add(emploginInputP);
 
         employeeViewPanel.add(userInput);
+        employeeViewPanel.add(output);
+        employeeViewPanel.add(find);
+        employeeViewPanel.add(findcustL);
+        findcustL.setBounds(100,50,300,30);
         find.setBounds(300, 100, 100, 30);
         find.addActionListener(findCustomer);
         userInput.setBounds(100,100,200,30);
@@ -109,11 +119,12 @@ public class window implements ActionListener {
     ActionListener employeeView = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("alkjhsfd");
            // customerLoginPanel.setLayout(null);//Setting Layout
-            homePanel.setVisible(false);
+            //homePanel.setVisible(false);
             employeeLoginPanel.setVisible(false);
-
-
+            mainWindow.revalidate();
+            mainWindow.repaint();
             employeeViewPanel.setVisible(true);
 
         }
