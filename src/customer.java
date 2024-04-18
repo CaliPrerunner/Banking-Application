@@ -144,7 +144,7 @@ public class customer implements customerInterface{
     public PQLL getAccList(){
         return this.accounts;
     }
-    public void setAccList(savingsAccount a){this.accounts.enqueue(a,1);}
+    public void setAccList(bankAccount a){this.accounts.enqueue(a,1);}
     //returns how many accounts the customer has
     public int getNumOfAccs(){return this.accounts.getCount();}
     //returns a sting of account of a customer ballance via a string
@@ -155,7 +155,7 @@ public class customer implements customerInterface{
             //"s: indicates its the start of the string
             String ballList ="";
             for(int x=1; x<= this.accounts.getCount(); x++){
-                savingsAccount t = (savingsAccount) this.getAccList().getNode(x).getData();
+                bankAccount t = (bankAccount) this.getAccList().getNode(x).getData();
                 ballList += String.valueOf(t.getBalance()) + " ";
 
             }
@@ -169,7 +169,7 @@ public class customer implements customerInterface{
         }else{
             double ballList =0;
             for(int x=1; x<= this.accounts.getCount(); x++){
-                savingsAccount t = (savingsAccount) this.getAccList().getNode(x).getData();
+                bankAccount t = (bankAccount) this.getAccList().getNode(x).getData();
                 ballList += t.getBalance();
 
             }
@@ -177,41 +177,30 @@ public class customer implements customerInterface{
 
         }
     }
+
+
+    public void createBankAccount(double m) {
+
+    }
     //adds account obj with priority and ballance created
-    public void createBankAccount(double m){
-        int id = this.customerID;
-        LocalDate d = LocalDate.now();
-        savingsAccount t = new savingsAccount(m,d, id);
-        this.getAccList().enqueue(t,this.compareAccounts(d));
-    }
-    public void createBankAccount(LocalDate d){
-        int id = this.customerID;
-        savingsAccount t = new savingsAccount(12,d,id);
-        this.getAccList().enqueue(t,this.compareAccounts(d));
-    }
-    public void createBankAccount(LocalDate d, Double ball){
-        int id = this.customerID;
-        savingsAccount t = new savingsAccount(ball,d,id);
-        //fix this
-    }
-    public void createBankAccount(LocalDate d, Double ball, int id){
-       this.customerID = id;
-        savingsAccount t = new savingsAccount(ball,d,id);
+//    public void createBankAccount(double m){
+//        int id = this.customerID;
+//        bankAccount t = new bankAccount(m, id);
+//        this.getAccList().enqueue(t,this.compareAccounts(d));
+//    }
 
-            this.getAccList().enqueue(t, this.compareAccounts(d));
 
-    }
     //does not work
     public void deposit(double m, int x){
-        savingsAccount t = (savingsAccount) this.getAccList().getNode(x).getData();
+        bankAccount t = (bankAccount) this.getAccList().getNode(x).getData();
         t.deposit(m);
     }
     public void withdraw(double m, int x){
-        savingsAccount t = (savingsAccount) this.getAccList().getNode(x).getData();
+        bankAccount t = (bankAccount) this.getAccList().getNode(x).getData();
         t.withdraw(m);
     }
     public void printTransactionList(int accountIndex) {
-        savingsAccount t = (savingsAccount) this.getAccList().getNode(accountIndex).getData();
+        bankAccount t = (bankAccount) this.getAccList().getNode(accountIndex).getData();
 
         for (Map.Entry<Date, Double> entry : t.getTransactionList().entrySet()) {
             System.out.println("Date: " + entry.getKey() + " Transaction: " + entry.getValue());
@@ -256,7 +245,7 @@ public class customer implements customerInterface{
         this.userName = userName;
     }
     public void createList(){
-        this.accounts = new PQLL<savingsAccount>();
+        this.accounts = new PQLL<bankAccount>();
     }
 
 
@@ -278,12 +267,12 @@ public class customer implements customerInterface{
             }
             int s =1;
             PQLL.node current = this.accounts.getHead();
-            savingsAccount curr;
+            bankAccount curr;
             TreeMap<LocalDate, Double> dateTree = new TreeMap<>();
 
 
             for (int x = 1; x <= this.accounts.getCount(); x++) {
-                curr = (savingsAccount) current.getData();
+                curr = (bankAccount) current.getData();
                 dateTree.put(curr.dateCreated, curr.ballance);
                 current = current.getNext();
                     }

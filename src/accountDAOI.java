@@ -1,2 +1,2 @@
-public interface accountDAOI extends DAOInterface<savingsAccount>{
+public interface accountDAOI extends DAOInterface<bankAccount>{
 }
