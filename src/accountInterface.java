@@ -2,7 +2,7 @@
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.TreeMap;
-public interface accountInterface {
+public interface accountInterface<T> extends Comparable<T> {
 
     double ballance =0;
     LocalDate dateCreated = LocalDate.now();

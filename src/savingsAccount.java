@@ -1,7 +1,5 @@
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 /*
@@ -10,7 +8,7 @@ import java.util.TreeMap;
 3) crete employee object
 
  */
-public class account implements accountInterface{
+public class savingsAccount implements accountInterface {
 
     double balance;
     LocalDate dateCreated;
@@ -18,18 +16,18 @@ public class account implements accountInterface{
      //maybe add account ID for transactions to be associated with account
      TreeMap<Date, Double> transactionList = new TreeMap<>();
 
-     public account(){
+     public savingsAccount(){
 
      }
 
-     public account(double ball, LocalDate dateCrea, int custID){
+     public savingsAccount(double ball, LocalDate dateCrea, int custID){
          this.balance = ball;
          this.customerID =custID;
          this.dateCreated = dateCrea;
          this.transactionList = new TreeMap<>();
      }
 
-    public account(int cID, LocalDate dateCreated){
+    public savingsAccount(int cID, LocalDate dateCreated){
          this.dateCreated = dateCreated;
         this.balance = 0;
         this.customerID = cID;
@@ -110,6 +108,12 @@ public class account implements accountInterface{
         System.out.println("Date Opened: " + dateCreated);
     }
 
-
+    public int compareTo(savingsAccount a ){
 
     }
+
+    @Override
+    public int compareTo(savingsAccount o) {
+        return this.compareTo(o);
+    }
+}

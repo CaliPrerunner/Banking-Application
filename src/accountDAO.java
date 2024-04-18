@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.List;
 
 public class accountDAO implements accountDAOI{
 
@@ -18,19 +17,19 @@ public class accountDAO implements accountDAOI{
             System.out.println(se.getMessage());}
     }
     @Override
-    public account get(int id) throws SQLException {
+    public savingsAccount get(int id) throws SQLException {
 
 
         pStatement = connection.prepareStatement(accountDatabaseConnection.getSelect());
         pStatement.setInt(1,id);
         result = pStatement.executeQuery();
 
-        account updatedEmp = null;
+        savingsAccount updatedEmp = null;
         if (result.next()) {
-            account e = new account();
+            savingsAccount e = new savingsAccount();
             //the names in the parentesis corresponds to the names of the columns in the SQL database
             //mysql looks for these columns in the parethesis
-            updatedEmp = new account( result.getDouble("balance"),
+            updatedEmp = new savingsAccount( result.getDouble("balance"),
                     result.getDate("date_created").toLocalDate(),
                     result.getInt("custID"));
         }
@@ -41,9 +40,9 @@ public class accountDAO implements accountDAOI{
 
     //tienes que connectar el public key del customer con el public key del accoututns
     @Override
-    public PQLL<account> getAll() throws SQLException {
+    public PQLL<savingsAccount> getAll() throws SQLException {
 
-        PQLL<account> set = new PQLL<>();
+        PQLL<savingsAccount> set = new PQLL<>();
         Statement stm = connection.createStatement();
         ResultSet result = stm.executeQuery(accountDatabaseConnection.getListallSql());
         customer c = new customer();
@@ -61,13 +60,13 @@ public class accountDAO implements accountDAOI{
     }
 
     @Override
-    public int save(account e) throws SQLException {
+    public int save(savingsAccount e) throws SQLException {
         return 0;
     }
 
     // return 1 = sucess return 0=nothing changed
     @Override
-    public int insert(account e) throws SQLException {
+    public int insert(savingsAccount e) throws SQLException {
         int res = -1;
         pStatement = connection.prepareStatement(accountDatabaseConnection.getInsert());
         pStatement.setInt(1, e.getCustomerID());
@@ -81,7 +80,7 @@ public class accountDAO implements accountDAOI{
 
     //no se pq estaba sin funcionando creo q es por el ai pk set up
     @Override
-    public int update(account e) throws SQLException {
+    public int update(savingsAccount e) throws SQLException {
 
         int result = -1;
 
@@ -98,7 +97,7 @@ public class accountDAO implements accountDAOI{
     }
 
     @Override
-    public int delete(account e) throws SQLException {
+    public int delete(savingsAccount e) throws SQLException {
         int res = -1;
 
         pStatement = connection.prepareStatement(accountDatabaseConnection.getDelete());

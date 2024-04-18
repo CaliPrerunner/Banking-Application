@@ -1,8 +1,7 @@
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
-public class accDAO implements DAOInterface<account> {
+public class accDAO implements DAOInterface<savingsAccount> {
 
     static String url = accDatabase.getURL();
     static String username = accDatabase.getURL();
@@ -17,32 +16,32 @@ public class accDAO implements DAOInterface<account> {
 
 
     @Override
-    public account get(int id) throws SQLException {
+    public savingsAccount get(int id) throws SQLException {
         return null;
     }
 
     @Override
-    public PQLL<account> getAll() throws SQLException {
+    public PQLL<savingsAccount> getAll() throws SQLException {
         return null;
     }
 
     @Override
-    public int save(account e) throws SQLException {
+    public int save(savingsAccount e) throws SQLException {
         return 0;
     }
 
     @Override
-    public int insert(account e) throws SQLException {
+    public int insert(savingsAccount e) throws SQLException {
         return 0;
     }
 
     @Override
-    public int update(account e) throws SQLException {
+    public int update(savingsAccount e) throws SQLException {
         return 0;
     }
 
     @Override
-    public int delete(account e) throws SQLException {
+    public int delete(savingsAccount e) throws SQLException {
         return 0;
     }
 }
