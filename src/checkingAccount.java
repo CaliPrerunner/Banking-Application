@@ -17,14 +17,14 @@ public class checkingAccount extends bankAccount {
         }
 
 
-        //returns -1 if this.XX is older than the obj being passed in
-        //returns 1 if the.xx is younger than the obj being passed in
+        //returns 1 if this.XX is older than the obj being passed in
+        //returns -1 if the.xx is younger than the obj being passed in
         //returns 0 if they are the same
         public int compareTo(bankAccount b){
             if(this.dateCreated.compareTo(b.dateCreated) < 0){
-                return -1;
-            }else if(this.dateCreated.compareTo(b.dateCreated) > 0){
                 return 1;
+            }else if(this.dateCreated.compareTo(b.dateCreated) > 0){
+                return -1;
             }else{ return 0;}
         }
 

@@ -11,6 +11,25 @@ public class Main {
         LocalDate test =  LocalDate.of(2022,11,8);
         bankAccount firstCheckingAccount = new savingsAccount(250,test);
 
+        customer bob = new customer(111,"bob");
+        //bob.setAccList(firstCheckingAccount);
+        //bob.setAccList(secondCheckingAccount);
+        customer ted = new customer(222,"ted");
+        //ted.setAccList(firstCheckingAccount);
+        //ted.setAccList(secondCheckingAccount);
+        LocalDate d = LocalDate.of(2022, 11,1);
+        ted.setDateCreated(d);
+
+        //this is how the PQLL should be implemented$$$$
+        PQLL teextC = new PQLL<>();
+
+        teextC.enqueue(secondCheckingAccount);
+        int x=0;
+        System.out.println("Should be: "+firstCheckingAccount.compareTo(secondCheckingAccount));
+        teextC.enqueue(firstCheckingAccount);
+
+        System.out.println("employees: "+ted.compareTo(bob));
+
         System.out.println(secondCheckingAccount.compareTo(firstCheckingAccount));
 
 

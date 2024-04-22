@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public interface customerInterface {
+public interface customerInterface<T> extends Comparable<T> {
       String firstName = null;
     String lastName = null;
      String SSN= null;

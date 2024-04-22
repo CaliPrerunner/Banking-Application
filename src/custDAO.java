@@ -55,9 +55,9 @@ public class custDAO implements custDAOI {
     }
 
     @Override
-    public PQLL<customer> getAll() throws SQLException {
+    public PQLL getAll() throws SQLException {
 
-        PQLL<customer> set = new PQLL<>();
+        PQLL set = new PQLL<>();
         Statement stm = connection.createStatement();
         ResultSet result = stm.executeQuery(custDatabaseConnection.getListallSql());
 
@@ -74,7 +74,7 @@ public class custDAO implements custDAOI {
            LocalDate date=  result.getDate("dateCreated").toLocalDate();
             String addy=    result.getString("address");
             customer c = new customer(id,fn,ln,ssn,usr, pass,phone,bday,gender,date,addy);
-            set.enqueue(c,c.compareAccounts(date));
+            set.enqueue(c);
         }
         return set;
     }

@@ -38,7 +38,7 @@ public class empDAO implements empDAOI{
     }
 
     @Override
-    public PQLL<employee> getAll() throws SQLException {
+    public PQLL getAll() throws SQLException {
         return null;
     }
 

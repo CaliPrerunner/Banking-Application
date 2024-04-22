@@ -25,12 +25,30 @@ public class customer implements customerInterface{
 
     }
     //contructor for accountDAO lis all
-
     public customer(int id, String lastName){
         this.customerID = id;
         this.lastName =lastName;
         this.dateCreated = LocalDate.of(2024,03,24);
+        this.accounts = new PQLL();
     }
+
+    //constructor for all attributes of customer class
+    public customer(String firstName, String lastName, String SSN, String userName, String password, String phone,
+                    String birthday, String gender, LocalDate dateCreated, PQLL accounts, int customerID, String addy) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = SSN;
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.dateCreated = dateCreated;
+        this.accounts = accounts;
+        this.customerID = customerID;
+        this.addy = addy;
+    }
+
     //constructor that generates ID and gets the local date of NOW
     public customer(String fn, String ln, String ssn, String addyStreet, String addyCity, String addyState, String addyz, String userN, String passw, String phon, String bday, String sex) {
         this.dateCreated = LocalDate.now();
@@ -144,7 +162,7 @@ public class customer implements customerInterface{
     public PQLL getAccList(){
         return this.accounts;
     }
-    public void setAccList(bankAccount a){this.accounts.enqueue(a,1);}
+    //public void setAccList(bankAccount a){this.accounts.enqueue(a);}
     //returns how many accounts the customer has
     public int getNumOfAccs(){return this.accounts.getCount();}
     //returns a sting of account of a customer ballance via a string
@@ -199,6 +217,7 @@ public class customer implements customerInterface{
         bankAccount t = (bankAccount) this.getAccList().getNode(x).getData();
         t.withdraw(m);
     }
+    /*
     public void printTransactionList(int accountIndex) {
         bankAccount t = (bankAccount) this.getAccList().getNode(accountIndex).getData();
 
@@ -207,7 +226,7 @@ public class customer implements customerInterface{
         }
 
     }
-
+     */
 
 
 
@@ -245,8 +264,9 @@ public class customer implements customerInterface{
         this.userName = userName;
     }
     public void createList(){
-        this.accounts = new PQLL<bankAccount>();
+        this.accounts = new PQLL<>();
     }
+    public void setDateCreated(LocalDate date){this.dateCreated = date;}
 
 
 
@@ -257,7 +277,7 @@ public class customer implements customerInterface{
     //this will be used to compare the account objects in the PQLL accounts variable and used to compare the priorties
     //will be used when creating and adding accounts
         public int compareAccounts(LocalDate d) {
-
+/*
         if(this.accounts == null){
             return 1;
         }
@@ -287,14 +307,68 @@ public class customer implements customerInterface{
                 s++;
             }
             return s;
-
-
+ */
+return 0;
         }
 
+    //returns 1 if c1 is older than c2
+    //returns -1 if c1 is younger c2
+    //returns 0 if they are the same
+    // returns 1 if c1 higher priority than c2
+    public int compareTo(customer o) {
+        bankAccount c1 = (bankAccount) this.accounts.getHead().getData();
+        bankAccount c2 = (bankAccount) o.accounts.getHead().getData();
+        if (this.dateCreated.compareTo(o.dateCreated) < 0) {
+            return -1;
+        } else if (this.dateCreated.compareTo(o.dateCreated)  > 0) {
+            return 1;
+        }//if the dates are the same then we need to check which has the highest ballance
+        else if (this.dateCreated.compareTo(o.dateCreated) == 0) {
+            if (c1.balance > c2.balance) {
+                return 1;
+            } else if (c1.balance < c2.balance) {
+                return -1;
+            }
+            return 0;
+        }
+return 0;
+    }
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 
+    public class bankCustomerBuilder{
+        private String firstName;
+        private String lastName;
+        private String SSN;
+        private String userName;
+        private String password;
+        private String phone;
+        private String birthday;
+        private String gender;
+        private LocalDate dateCreated;
+        private PQLL accounts;
+        private String addy;
+        int customerID;
+        public customer build(){
+            return new customer( this.firstName,  lastName,  SSN,  userName,  password,  phone,
+                    birthday,  gender,  dateCreated,  accounts,  customerID, addy);
+        }
+        //Setters
+        public bankCustomerBuilder firstName(String firstName) {this.firstName = firstName; return this;}
+        public bankCustomerBuilder lastName(String lastName) {this.lastName = lastName;return this;}
+        public bankCustomerBuilder SSN(String SSN) {this.SSN = SSN;return this;}
+        public bankCustomerBuilder userName(String userName) {this.userName = userName;return this;}
+        public bankCustomerBuilder password(String password) {this.password = password;return this;}
+        public bankCustomerBuilder phone(String phone) {this.phone = phone;return this;}
+        public bankCustomerBuilder birthday(String birthday) {this.birthday = birthday; return this;}
+        public bankCustomerBuilder gender(String gender) {this.gender = gender;return this;}
+        public bankCustomerBuilder dateCreated(LocalDate dateCreated) {this.dateCreated = dateCreated;return this;}
+        public bankCustomerBuilder accounts(PQLL accounts) {this.accounts = accounts;return this;}
+        public bankCustomerBuilder addy(String addy) {this.addy = addy;return this;}
+        public bankCustomerBuilder customerID(int customerID) {this.customerID = customerID;return this;}
 
-
-
+    }
 
 }
-

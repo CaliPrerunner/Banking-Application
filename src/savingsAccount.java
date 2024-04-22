@@ -22,11 +22,11 @@ public class savingsAccount extends bankAccount {
     //returns 1 if the.xx is younger than the obj being passed in
     //returns 0 if they are the same
     //**only works for savings account objects
-    public int compareTo(bankAccount b){
+    public int compareTo(bankAccount b){;
         if(this.dateCreated.compareTo(b.dateCreated) < 0){
-            return -1;
-        }else if(this.dateCreated.compareTo(b.dateCreated) > 0){
             return 1;
+        }else if(this.dateCreated.compareTo(b.dateCreated) > 0){
+            return -1;
         }else{ return 0;}
     }
 

@@ -21,7 +21,7 @@ public class accDAO implements DAOInterface<bankAccount> {
     }
 
     @Override
-    public PQLL<bankAccount> getAll() throws SQLException {
+    public PQLL getAll() throws SQLException {
         return null;
     }
 

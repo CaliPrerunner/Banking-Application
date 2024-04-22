@@ -1,4 +1,4 @@
-public interface PQLLInterface<T> {
+public interface PQLLInterface<T extends Comparable<T>> {
 
     public class node<T>{
         private T data;
@@ -33,14 +33,14 @@ public interface PQLLInterface<T> {
 
 
     }
-
+    //returns the object of the highest priority
+    public PQLL.node getHead();    public boolean isEmpty(); public void clear();public void enqueue(T data);
     public void listALL();
-    public void enqueue(T data, int pri);
     public int getCount();
-    public PQLL.node getHead();
-    public PQLL.node peek();
+
+
     public PQLL.node pop();
     public void removeObj(T data);
-    public boolean isEmpty();
+
 
 }

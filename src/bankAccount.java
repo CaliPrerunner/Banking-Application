@@ -8,7 +8,7 @@ import java.util.TreeMap;
 3) crete employee object
 
  */
-public class bankAccount implements accountInterface {
+public class bankAccount<T> implements accountInterface<T> {
 
     double balance;
     LocalDate dateCreated;
@@ -20,7 +20,6 @@ public class bankAccount implements accountInterface {
 
      public bankAccount(){
          this.dateCreated = LocalDate.now();
-
      }
 
      public bankAccount(double ball, int custID){
@@ -127,11 +126,11 @@ public class bankAccount implements accountInterface {
         System.out.println("Date Opened: " + dateCreated);
     }
 
+    public int compareTo(T ba) {
+         return this.compareTo((bankAccount) ba);
+    }
     public int compareTo(bankAccount ba) {
          return this.compareTo(ba);
     }
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
+
 }

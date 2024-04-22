@@ -1,10 +1,11 @@
 
-public class PQLL<T> implements PQLLInterface<T> {
+public class PQLL<T extends Comparable<T>> implements PQLLInterface<T> {
     private node head;
     private int count;
 
 
-    public class node<T>{
+
+    public class node<T extends Comparable<T>>{
         private T data;
         private node next;
         private int priorioty;
@@ -18,6 +19,11 @@ public class PQLL<T> implements PQLLInterface<T> {
             this.data = data;
             this.next = null;
             this.priorioty = prioroty;
+        }
+        public node(T data){
+            this.data = data;
+            this.next = null;
+            this.priorioty = 0;
         }
         public void setData(T data){this.data =data;}
         public void setNext(node node){this.next =node;}
@@ -36,7 +42,9 @@ public class PQLL<T> implements PQLLInterface<T> {
         }
         public node getNext(){return this.next;}
 
-
+        public int compareTo(T d) {
+            return d.compareTo(this.data);
+        }
     }
 
     public PQLL() {
@@ -67,6 +75,7 @@ public class PQLL<T> implements PQLLInterface<T> {
     public void clear(){
         this.head = null;
     }
+    //returns the object of the highest priority
     public node getHead(){
         return this.head;
     }
@@ -78,7 +87,6 @@ public class PQLL<T> implements PQLLInterface<T> {
         System.out.println("########### LIST ##########");
         node current = this.head;
         for(int x=1; x<=this.count;x++){
-
             System.out.println("data: "+ current.data + " priority: "+ current.priorioty+ " NEXT value: "+ current.next);
             current = current.next;
         }
@@ -89,7 +97,6 @@ public class PQLL<T> implements PQLLInterface<T> {
         node prev = null;
 
         while(current.hasNext()){
-
 
             if(current.data == data)
             {System.out.println(" current data: "+ current.data+ " prev data: ");
@@ -155,16 +162,64 @@ public class PQLL<T> implements PQLLInterface<T> {
         currentNode.next = newNode;
         this.count++;
     }
-    
+
+
+public void compareNode(node newNode){
+
+        //use recusion to find the node in the list
+
+    node current = new node();
+    current = this.head;
+
+    switch (newNode.compareTo(current.getData())) {
+        case 1:
+            //newNode is higher priority
+            System.out.println("Higher");
+        case -1:
+            //newNode is lower priority
+            System.out.println("lower");
+            current =current.next;
+        case 0:
+            //they are the same
+            System.out.println("same");
+
+    }
+}
 
     //creates new node from data, adds it based on the priority
     //compares prioroity and places it based off that
-    public void enqueue(T data, int pri) {
+    public void enqueue(T data) {
 
-        node newNode = new node(data, pri);
+        //  WHEN THE NODES GET TO THE COMPARE TO METHOD, THEY ARE
+        //NULL that is why compare to method is not working
+        node newNode = new node(data);
         node current = new node();
         current = this.head;
+       if(this.head.data == null){
+           this.head = newNode;
+       }else {
+           System.out.println("compare to method: " + newNode.getData().compareTo(current.getData()));
+           switch (newNode.compareTo(current.getData())) {
+               case 1:
+                   //newNode is higher priority
+                   System.out.println("Higher");
+                   //need to swap the newNode with the current node
+               case -1:
+                   //newNode is lower priority
+                   System.out.println("lower");
+                   //have to loop until it finds a node where the newnode
+                   //is of higher priority than some of the nodes in the list
+                   current =current.next;
+               case 0:
+                   //they are the same
+                   //imput the new node right after the current
+                   System.out.println("same");
 
+           }
+       }
+
+
+/*
         //if the head is null or the heads priority is greater than the
         //new priority, it will replace the head
         if(current.data == null || current.priorioty > pri) {
@@ -187,12 +242,12 @@ public class PQLL<T> implements PQLLInterface<T> {
             current.next = newNode;
         }
         this.count++;
-
+*/
         }
         //returns the object of the highest priority
-        public node peek(){
+    public node peek(){
         return this.head;
-        }
+    }
 
         //returns the last node in the list
     public node pop() {
@@ -202,6 +257,7 @@ public class PQLL<T> implements PQLLInterface<T> {
         }
         return current;
     }
+
     //removes the last entry
     public void deque(){
         node n = new node();
@@ -212,6 +268,7 @@ public class PQLL<T> implements PQLLInterface<T> {
         }
         n.next = null;
     }
+
 
 
 
