@@ -72,15 +72,6 @@ public class bankAccount<T> implements accountInterface<T> {
     public void setAccNumber(int n){this.accNumber=n;}
 
 
-    public void deposit(double amount, Date date){
-        if (amount > 0){
-            this.balance += amount;
-            transactionList.put(date, amount);
-        }
-        else{
-            System.out.println("Deposit amount must be positive");
-        }
-    }
     public void deposit(double amount){
          Date date =  new Date();
         if (amount > 0){
@@ -91,34 +82,31 @@ public class bankAccount<T> implements accountInterface<T> {
             System.out.println("Deposit amount must be positive");
         }
     }
-    public void withdraw(double amount, Date date){
-        if (amount > 0){
-            if (amount <= this.balance){
-                this.balance -= amount;
-                transactionList.put(date, -amount);
-            }
-            else{
-                System.out.println("Not enough funds to complete the transaction");
-            }
-        }
-        else{
-            System.out.println("Withdrawal amount must be positive");
-        }
-    }
-    public void withdraw(double amount){
+    public boolean withdraw(double amount){
         Date date =  new Date();
         if (amount > 0){
             if (amount <= this.balance){
                 this.balance -= amount;
                 transactionList.put(date, -amount);
+                return true;
             }
             else{
                 System.out.println("Not enough funds to complete the transaction");
+                return false;
             }
         }
         else{
             System.out.println("Withdrawal amount must be positive");
+            return false;
         }
+    }
+    public void transfer(bankAccount destination, double ammount) {
+       if(this.withdraw(ammount)){
+           destination.deposit(ammount);
+       }else{
+           System.out.println("Transaction failed");
+       }
+
     }
     public void printAccountDetails() {
         System.out.println("Account ID: " + customerID);

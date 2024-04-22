@@ -13,6 +13,7 @@ public class customer implements customerInterface{
     private String phone;
     private String birthday;
     private String gender;
+    private String eMail;
     private LocalDate dateCreated;
     private PQLL accounts;
     int customerID;
@@ -34,7 +35,7 @@ public class customer implements customerInterface{
 
     //constructor for all attributes of customer class
     public customer(String firstName, String lastName, String SSN, String userName, String password, String phone,
-                    String birthday, String gender, LocalDate dateCreated, PQLL accounts, int customerID, String addy) {
+                    String birthday, String gender, LocalDate dateCreated, PQLL accounts, int customerID, String addy,String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
@@ -47,6 +48,7 @@ public class customer implements customerInterface{
         this.accounts = accounts;
         this.customerID = customerID;
         this.addy = addy;
+        this.eMail = email;
     }
 
     //constructor that generates ID and gets the local date of NOW
@@ -79,7 +81,6 @@ public class customer implements customerInterface{
         this.gender = sex;
         this.customerID = customerID;
         this.accounts = new PQLL();
-
         //later to implement: a checker to see if ID has been taken
     }
 
@@ -268,12 +269,6 @@ public class customer implements customerInterface{
     }
     public void setDateCreated(LocalDate date){this.dateCreated = date;}
 
-
-
-
-
-
-
     //this will be used to compare the account objects in the PQLL accounts variable and used to compare the priorties
     //will be used when creating and adding accounts
         public int compareAccounts(LocalDate d) {
@@ -338,7 +333,11 @@ return 0;
         return 0;
     }
 
-    public class bankCustomerBuilder{
+    public static bankCustomerBuilder customerBuilder (){
+        return new bankCustomerBuilder();
+    }
+
+    public static class bankCustomerBuilder{
         private String firstName;
         private String lastName;
         private String SSN;
@@ -347,16 +346,17 @@ return 0;
         private String phone;
         private String birthday;
         private String gender;
+        private String eMail;
         private LocalDate dateCreated;
         private PQLL accounts;
         private String addy;
         int customerID;
         public customer build(){
-            return new customer( this.firstName,  lastName,  SSN,  userName,  password,  phone,
-                    birthday,  gender,  dateCreated,  accounts,  customerID, addy);
+            return new customer( firstName,  lastName,  SSN,  userName,  password,  phone,
+                    birthday,  gender,  dateCreated,  accounts,  customerID, addy, eMail);
         }
         //Setters
-        public bankCustomerBuilder firstName(String firstName) {this.firstName = firstName; return this;}
+        public bankCustomerBuilder firstName(String fistName) {this.firstName = fistName; return this;}
         public bankCustomerBuilder lastName(String lastName) {this.lastName = lastName;return this;}
         public bankCustomerBuilder SSN(String SSN) {this.SSN = SSN;return this;}
         public bankCustomerBuilder userName(String userName) {this.userName = userName;return this;}
@@ -368,6 +368,7 @@ return 0;
         public bankCustomerBuilder accounts(PQLL accounts) {this.accounts = accounts;return this;}
         public bankCustomerBuilder addy(String addy) {this.addy = addy;return this;}
         public bankCustomerBuilder customerID(int customerID) {this.customerID = customerID;return this;}
+        public bankCustomerBuilder email(String email) {this.eMail = email;return this;}
 
     }
 
