@@ -1,13 +1,14 @@
 public class depositCommand implements TransactionInterface{
-    private final double ammount;
-    private final bankAccount account;
+    private final double amount;
+    private final bankAccount sourceAccount;
 
     public depositCommand(bankAccount acc, double ammount){
-        this.ammount = ammount;
-        this.account = acc;
+        this.amount = ammount;
+        this.sourceAccount = acc;
     }
     @Override
     public void execute() {
-        account.deposit(ammount);
+        sourceAccount.deposit(amount);
     }
+
 }

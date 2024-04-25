@@ -1,13 +1,13 @@
 public class withdrawCommand implements TransactionInterface{
-        private final double ammount;
-        private final bankAccount account;
-        public withdrawCommand(bankAccount acc, double ammount){
-            this.ammount = ammount;
-            this.account = acc;
+        private final double amount;
+        private final bankAccount sourceAccount;
+        public withdrawCommand(bankAccount acc, double amount){
+            this.amount = amount;
+            this.sourceAccount = acc;
         }
         @Override
         public void execute() {
-            account.withdraw(ammount);
+            sourceAccount.withdraw(amount);
         }
 
 }

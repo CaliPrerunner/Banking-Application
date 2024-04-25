@@ -17,7 +17,6 @@ public class customer implements customerInterface{
     private LocalDate dateCreated;
     private PQLL accounts;
     int customerID;
-
     private String addy;
     //^linked list of addy <- ********implement after linked list object has been created***********
 
@@ -333,7 +332,7 @@ return 0;
         return 0;
     }
 
-    public static bankCustomerBuilder customerBuilder (){
+    public static bankCustomerBuilder customerBuilder(){
         return new bankCustomerBuilder();
     }
 
